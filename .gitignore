@@ -1,0 +1,9 @@
+*.gem
+Gemfile.lock
+/build
+.repl_history
+.DS_Store
+.dat*
+.rake_tasks*
+.idea
+vendor
