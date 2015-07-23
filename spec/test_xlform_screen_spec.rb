@@ -13,6 +13,10 @@ describe 'ProMotion::XLFormScreen' do
     view("ACCOUNT INFORMATION").should.not.be.nil
   end
 
+  it "contains a section footer" do
+    view("Some help text").should.not.be.nil
+  end
+
   it "contains 6 sections" do
     views(UITableView).first.numberOfSections.should == 6
   end
@@ -32,4 +36,5 @@ describe 'ProMotion::XLFormScreen' do
     @form_screen.reload(cell)
     @form_screen.valid?.should == true
   end
+
 end
