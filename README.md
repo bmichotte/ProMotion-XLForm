@@ -5,6 +5,8 @@ ProMotion-XLForm provides a PM::XLFormScreen for [ProMotion](https://github.com/
 ## Warning
 This gem is currently in very early-stage. Use it at your own risk :)
 
+[![Build Status](https://travis-ci.org/bmichotte/ProMotion-XLForm.svg?branch=master)](https://travis-ci.org/bmichotte/ProMotion-XLForm)
+
 ## Installation
 
 ```ruby

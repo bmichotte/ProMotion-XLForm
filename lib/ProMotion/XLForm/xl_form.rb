@@ -56,6 +56,18 @@ module ProMotion
           # placeholder
           cell.cellConfigAtConfigure.setObject(cell_data[:placeholder], forKey: "textField.placeholder") if cell_data[:placeholder]
 
+          # step_counter
+          if cell_data[:type] == :step_counter
+            min  = properties[:min]
+            max  = properties[:max]
+            step = properties[:step]
+
+            cell.cellConfigAtConfigure.setObject(true, forKey: "stepControl.wraps")
+            cell.cellConfigAtConfigure.setObject(min, forKey: "stepControl.minimumValue") if min
+            cell.cellConfigAtConfigure.setObject(max, forKey: "stepControl.maximumValue") if max
+            cell.cellConfigAtConfigure.setObject(step, forKey: "stepControl.maximumValue") if step
+          end
+
           # slider
           if cell_data[:type] == :slider
             min  = properties[:min]

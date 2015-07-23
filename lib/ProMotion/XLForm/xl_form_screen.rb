@@ -105,6 +105,17 @@ module ProMotion
       end
     end
 
+    def cell_with_tag(tag)
+      if tag.respond_to? :to_s
+        tag = tag.to_s
+      end
+      self.form.formRowWithTag(tag)
+    end
+
+    def reload(cell)
+      reloadFormRow(cell)
+    end
+
     protected
     def on_cancel(_)
       form_options = self.class.get_form_options
