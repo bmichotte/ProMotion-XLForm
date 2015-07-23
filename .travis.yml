@@ -3,11 +3,11 @@ before_install:
     - (ruby --version)
     - sudo chown -R travis ~/Library/RubyMotion
     - mkdir -p ~/Library/RubyMotion/build
-    - sudo motion update --cache-version=2.38
+    - sudo motion update
 gemfile:
   - Gemfile
 script:
-    - bundle exec rake clean:all
     - bundle install
     - bundle exec rake pod:install > /dev/null
+    - bundle exec rake clean
     - bundle exec rake spec
