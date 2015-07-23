@@ -27,38 +27,35 @@ To create a form, create a new `PM::XLFormScreen` and implement `form_data`.
 ```ruby
 class TestFormScreen < PM::XLFormScreen
   def form_data
-    [
-      {
-        title:  'Account information',
-        cells: [
-          {
-            {
-              title:       'Email',
-              name:        :email,
-              type:        :email,
-              placeholder: 'Enter your email',
-              required:    true
-            },
-            {
-              title: 'Name',
-              name:  :name,
-              type:  :text,
-              value: 'Default value'
-            },
-            {
-              title: 'Sex',
-              name: :sex,
-              type: :selector_push,
-              options: {
-                male: 'Male',
-                female: 'Female',
-                other: 'Other'
-               }
-            }
-          }
-        ]
-      }
-    ]
+  [
+    {
+      title:  'Account information',
+      cells: [
+        {
+          title:       'Email',
+          name:        :email,
+          type:        :email,
+          placeholder: 'Enter your email',
+          required:    true
+        },
+        {
+          title: 'Name',
+          name:  :name,
+          type:  :text,
+          value: 'Default value'
+        },
+        {
+          title: 'Sex',
+          name: :sex,
+          type: :selector_push,
+          options: {
+          male: 'Male',
+          female: 'Female',
+          other: 'Other'
+        }
+      ]
+    }
+  ]
   end
 end
 ```
@@ -155,11 +152,9 @@ You can get the values of your form with `values`. You can also get validation e
   options: [:insert, :delete, :reorder],
   cells: [
     {
-      {
-        title: 'Add a new tag',
-        name:  :tag,
-        type:  :text
-      }
+      title: 'Add a new tag',
+      name:  :tag,
+      type:  :text
     }
   ]
 }
