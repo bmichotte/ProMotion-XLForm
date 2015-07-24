@@ -10,7 +10,7 @@ This gem is currently in very early-stage. Use it at your own risk :)
 ## Installation
 
 ```ruby
-gem 'ProMotion-form'
+gem 'ProMotion-XLForm'
 ```
 
 Then:
@@ -51,9 +51,10 @@ class TestFormScreen < PM::XLFormScreen
           name: :sex,
           type: :selector_push,
           options: {
-          male: 'Male',
-          female: 'Female',
-          other: 'Other'
+            male: 'Male',
+            female: 'Female',
+            other: 'Other'
+          }
         }
       ]
     }
