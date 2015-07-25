@@ -17,12 +17,36 @@ class TestFormScreen < PM::XLFormScreen
                             name:        :email,
                             type:        :email,
                             placeholder: 'Enter your email',
-                            required:    true
+                            required:    true,
+                            validators: {
+                              email: true
+                            }
                         },
                         {
-                            title: 'Name',
-                            name:  :name,
-                            type:  :text
+                            title:       'Url',
+                            name:        :url,
+                            type:        :url,
+                            placeholder: 'Enter an url',
+                            required:    true,
+                            validators: {
+                              url: true
+                            }
+                        },
+                        {
+                            title: 'Only letters',
+                            name:  :letters,
+                            type:  :text,
+                            validators: {
+                              regex: { regex: /^[a-zA-Z]+$/, message: 'Invalid name' }
+                            }
+                        },
+                        {
+                          title: 'One',
+                          name:  :only_one,
+                          type:  :text,
+                          validators: {
+                            custom: NumberValidator.new
+                          }
                         },
                         {
                             title: 'Yes ?',
@@ -161,5 +185,16 @@ class TestValueTransformer < ProMotion::ValueTransformer
     str << value['second_text'] if value['second_text']
 
     str.join(',')
+  end
+end
+
+class NumberValidator < ProMotion::Validator
+  def initialize
+    @message = "Only 1 !!!"
+  end
+
+  def valid?(row)
+    return nil if row.nil? or row.value.nil?
+    row.value == "1"
   end
 end

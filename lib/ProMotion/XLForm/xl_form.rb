@@ -129,6 +129,40 @@ module ProMotion
 
           cell.disabled = !cell_data[:enabled] if cell_data[:enabled]
 
+          # validators
+          if cell_data[:validators]
+            validators = cell_data[:validators]
+            validators.each do |key, value|
+              validator = case key
+              when :email
+                XLFormValidator.emailValidator
+              when :regex
+                regex = value[:regex]
+                if regex.is_a?(String)
+                  XLFormRegexValidator.formRegexValidatorWithMsg(value[:message], regex: regex)
+                elsif regex.is_a?(Regexp)
+                  ProMotion::RegexValidator.validator(value[:message], regex)
+                else
+                  mp "Invalid regex : #{regex.inspect}. Please provides a Regexp or a String", force_color: :red
+                  nil
+                end
+              when :url
+                ProMotion::UrlValidator.validator
+              else
+                if value.is_a?(ProMotion::Validator) or value.respond_to?(:isValid)
+                  value
+                else
+                  mp "Invalid validator : #{key}", force_color: :red
+                  nil
+                end
+              end
+
+              if validator
+                cell.addValidator(validator)
+              end
+            end
+          end
+
           section.addFormRow(cell)
 
           # multi sections

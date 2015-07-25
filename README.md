@@ -216,6 +216,40 @@ end
 
 For a more advanced custom selector, you can set `view_controller_class:`. See [XLForm documentation](https://github.com/xmartlabs/XLForm/#custom-selectors---selector-row-with-a-custom-selector-view-controller) for more informations.
 
+### Validators
+
+You can add validators to cells.
+
+```ruby
+{
+  title:       'Email',
+  name:        :email,
+  type:        :email,
+  required:    true,
+  validators: {
+    email: true
+  }
+}
+```
+
+`:email` and `:url` are available out of the box, as well as `:regex`. You will have to provide a valid regex and a message.
+
+```ruby
+{
+  title:       'Only letters',
+  name:        :letters,
+  type:        :text,
+  required:    true,
+  validators: {
+    regex: { regex: /^[a-zA-Z]+$/, message: "Only letters please !" }
+  }
+}
+```
+
+Finally, you can provide a PM::Validator with a `valid?(cell)` method.
+
+
+
 ## Todo
 - Validations
 - Tests
