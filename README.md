@@ -5,7 +5,7 @@ ProMotion-XLForm provides a PM::XLFormScreen for [ProMotion](https://github.com/
 ## Warning
 This gem is currently in very early-stage. Use it at your own risk :)
 
-[![Build Status](https://travis-ci.org/bmichotte/ProMotion-XLForm.svg?branch=master)](https://travis-ci.org/bmichotte/ProMotion-XLForm)
+[![Build Status](https://travis-ci.org/bmichotte/ProMotion-XLForm.svg?branch=master)](https://travis-ci.org/bmichotte/ProMotion-XLForm) [![Gem Version](https://badge.fury.io/rb/ProMotion-XLForm.svg)](http://badge.fury.io/rb/ProMotion-XLForm)
 
 ## Installation
 
@@ -169,18 +169,23 @@ You can create a custom _subform_ with a few options
 
 ```ruby
 {
-  title: 'Custom',
-  name:  :custom,
+  title:  'Custom section',
   cells: [
     {
-        title: 'Some text',
-        name:  :some_text,
-        type:  :text
-    },
-    {
-        title: 'Other text',
-        name:  :some_other_text,
-        type:  :text
+      title: 'Custom',
+      name:  :custom,
+      cells: [
+        {
+            title: 'Some text',
+            name:  :some_text,
+            type:  :text
+        },
+        {
+            title: 'Other text',
+            name:  :some_other_text,
+            type:  :text
+        }
+      ]
     }
   ]
 }
