@@ -26,4 +26,20 @@ class XLFormRowDescriptor
     row_descriptor_copy
   end
 
+  def options=(options)
+    self.selectorOptions = parse_options(options)
+  end
+
+  def parse_options(options)
+   return nil if options.nil? or options.empty?
+
+   options.map do |key, text|
+     val = key
+     if val.is_a? Symbol
+       val = val.to_s
+     end
+     XLFormOptionsObject.formOptionsObjectWithValue(val, displayText: text)
+   end
+ end
+
 end

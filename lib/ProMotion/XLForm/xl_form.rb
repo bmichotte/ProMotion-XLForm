@@ -112,12 +112,11 @@ module ProMotion
           add_proc cell, :on_remove, cell_data[:on_remove] if cell_data[:on_remove]
 
           cell.selectorTitle   = cell_data[:selector_title] if cell_data[:selector_title]
-          options              = parse_options(cell_data[:options])
-          cell.selectorOptions = options
+          cell.options = cell_data[:options]
 
           value = cell_data[:value]
-          if value and options
-            options.each do |opt|
+          if value and cell.selectorOptions
+            cell.selectorOptions.each do |opt|
               if opt.formValue == value
                 value = opt
                 break
@@ -188,18 +187,6 @@ module ProMotion
       @blocks             ||= {}
       @blocks[tag]        ||= {}
       @blocks[tag][event] = block.respond_to?('weak!') ? block.weak! : block
-    end
-
-    def parse_options(options)
-      return nil if options.nil? or options.empty?
-
-      options.map do |key, text|
-        val = key
-        if val.is_a? Symbol
-          val = val.to_s
-        end
-        XLFormOptionsObject.formOptionsObjectWithValue(val, displayText: text)
-      end
     end
 
     def parse_section_options(options)
