@@ -225,8 +225,17 @@ module ProMotion
 
     def formRowDescriptorValueHasChanged(row, oldValue: old_value, newValue: new_value)
       super
+
       callback = @form_builder.get_callback(row, :on_change)
-      callback.call(old_value, new_value) if callback
+      if callback
+        if old_value.is_a? XLFormOptionsObject
+          old_value = old_value.formValue
+        end
+        if new_value.is_a? XLFormOptionsObject
+          new_value = new_value.formValue
+        end
+        callback.call(old_value, new_value)
+      end
     end
 
   end
