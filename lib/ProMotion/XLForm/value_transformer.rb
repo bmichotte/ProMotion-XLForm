@@ -9,6 +9,7 @@ module ProMotion
     end
 
     def transformedValue(value)
+      return self.transformed_value(value) if self.respond_to?(:transformed_value)
       return nil if value.nil?
 
       # best effort
