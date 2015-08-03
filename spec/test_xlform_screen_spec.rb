@@ -17,8 +17,8 @@ describe 'ProMotion::XLFormScreen' do
     view("Some help text").should.not.be.nil
   end
 
-  it "contains 6 sections" do
-    views(UITableView).first.numberOfSections.should == 7
+  it "contains 8 sections" do
+    views(UITableView).first.numberOfSections.should == 8
   end
 
   it "contains 1 section with 6 fields" do
@@ -126,6 +126,15 @@ describe 'ProMotion::XLFormScreen' do
 
     show_me.isHidden.should == false
     hide_me.isHidden.should == false
+  end
+
+  it "should get a color" do
+    color_cell = @form_screen.cell_with_tag(:color)
+    color_cell.value.should == UIColor.blueColor
+
+    color_cell.value = UIColor.redColor
+    @form_screen.reload(color_cell)
+    color_cell.value.should == UIColor.redColor
   end
 
 end

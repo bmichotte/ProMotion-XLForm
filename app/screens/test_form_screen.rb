@@ -185,6 +185,17 @@ class TestFormScreen < PM::XLFormScreen
             visible: ':show_me not contains "hello"'
           }
         ]
+      },
+      {
+        title: 'Color chooser',
+        cells: [
+          {
+            title: 'Color',
+            type: :color,
+            name: :color,
+            value: UIColor.blueColor
+          }
+        ]
       }
     ]
   end

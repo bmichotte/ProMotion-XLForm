@@ -102,7 +102,8 @@ end
 * :button
 * :info
 * :step_counter
-* :image
+* :image (ProMotion-XLForm specific)
+* :color (ProMotion-XLForm specific using [RSColorPicker](https://github.com/RSully/RSColorPicker))
 
 ### Class options
 

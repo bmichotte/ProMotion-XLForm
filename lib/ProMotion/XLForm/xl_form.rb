@@ -91,6 +91,8 @@ module ProMotion
           # image
           if cell_data[:type] == :image
             cell_class = XLFormImageSelectorCell if cell_class.nil?
+          elsif cell_data[:type] == :color
+            cell_class = XLFormColorSelectorCell if cell_class.nil?
           end
 
           cell.cellClass = cell_class if cell_class
@@ -316,7 +318,8 @@ module ProMotion
           button:                      XLFormRowDescriptorTypeButton,
           info:                        XLFormRowDescriptorTypeInfo,
           step_counter:                XLFormRowDescriptorTypeStepCounter,
-          image:                       'XLFormRowDescriptorTypeImage'
+          image:                       'XLFormRowDescriptorTypeImage',
+          color:                       'XLFormRowDescriptorTypeColor',
       }[symbol] || symbol
     end
 

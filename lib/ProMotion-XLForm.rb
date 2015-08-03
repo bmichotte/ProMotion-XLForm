@@ -7,6 +7,7 @@ require 'motion-cocoapods'
 Motion::Project::App.setup do |app|
   lib_dir_path = File.dirname(File.expand_path(__FILE__))
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_image_selector_cell.rb")
+  app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_color_selector_cell.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_class_methods.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_module.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_view_controller.rb")
@@ -21,5 +22,6 @@ Motion::Project::App.setup do |app|
 
   app.pods do
     pod 'XLForm', '~> 3.0.0'
+    pod 'RSColorPicker'
   end
 end
