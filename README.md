@@ -248,6 +248,46 @@ You can add validators to cells.
 
 Finally, you can provide a PM::Validator with a `valid?(cell)` method.
 
+### Make a row or section invisible depending on other rows values
+[You can show/hide cells](https://github.com/xmartlabs/XLForm#make-a-row-or-section-invisible-depending-on-other-rows-values) depending on a cell value with a predicate
+
+```ruby
+{
+  title: 'Hide and seek',
+  cells: [
+    {
+      title: 'Switch me',
+      type: :switch,
+      name: :hide_and_seek,
+      value: true
+    },
+    {
+      title: 'Appear when switch is on',
+      name: :show_me,
+      type: :info,
+      visible: {
+        # the cell name wich will "trigger" the visibility
+        name: :hide_and_seek,
+
+        # the operand. Valid operands are :equal, :not_equal, :contains, :not_contains
+        is: :equal,
+
+        # the value which trigger the visibility
+        value: true }
+    },
+    {
+      title: 'Appear when switch is off',
+      name: :hide_me,
+      type: :info,
+
+      # you can also write it this way
+      visible: ':hide_and_seek == false'
+      # also valid ':some_text contains "a text"'
+      #            ':some_text not contains "a text"'
+    }
+  ]
+}
+```
 
 
 ## Todo

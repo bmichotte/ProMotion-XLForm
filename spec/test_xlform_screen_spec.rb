@@ -18,7 +18,7 @@ describe 'ProMotion::XLFormScreen' do
   end
 
   it "contains 6 sections" do
-    views(UITableView).first.numberOfSections.should == 6
+    views(UITableView).first.numberOfSections.should == 7
   end
 
   it "contains 1 section with 6 fields" do
@@ -104,6 +104,28 @@ describe 'ProMotion::XLFormScreen' do
     @form_screen.reload(cell)
 
     @form_screen.valid?.should == true
+  end
+
+  it "should play hide and seek" do
+    predicate = "$hide_and_seek == 1".formPredicate
+    show_me = @form_screen.cell_with_tag(:show_me)
+    show_me.hidden.should == predicate
+    show_me.isHidden.should == true
+
+    predicate = 'not($show_me contains[c] "hello")'.formPredicate
+    hide_me = @form_screen.cell_with_tag(:hide_me)
+    hide_me.hidden.should == predicate
+    hide_me.isHidden.should == true
+
+    switch = @form_screen.cell_with_tag(:hide_and_seek)
+    switch.value = false
+    @form_screen.reload(switch)
+
+    show_me.value = 'hello'
+    @form_screen.reload(show_me)
+
+    show_me.isHidden.should == false
+    hide_me.isHidden.should == false
   end
 
 end
