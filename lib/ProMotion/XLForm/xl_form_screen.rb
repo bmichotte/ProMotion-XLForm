@@ -42,6 +42,8 @@ module ProMotion
                                      action:      'on_save:'
                                  }
       end
+
+      self.form_added if self.respond_to?(:form_added)
     end
 
     def form_data
