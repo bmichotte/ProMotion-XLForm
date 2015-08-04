@@ -17,15 +17,6 @@ end
 
 class XLFormRowDescriptor
 
-  alias :old_copyWithZone :copyWithZone
-
-  def copyWithZone(zone)
-    row_descriptor_copy = old_copyWithZone(zone)
-
-    row_descriptor_copy.valueTransformer = self.valueTransformer
-    row_descriptor_copy
-  end
-
   def options=(options)
     self.selectorOptions = parse_options(options)
   end
