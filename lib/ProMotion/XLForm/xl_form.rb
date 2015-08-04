@@ -126,7 +126,7 @@ module ProMotion
             end
           end
 
-          cell.value    = value if value
+          cell.value = value
 
           cell.disabled = !cell_data[:enabled] if cell_data[:enabled]
 
