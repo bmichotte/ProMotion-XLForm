@@ -175,14 +175,14 @@ class TestFormScreen < PM::XLFormScreen
             title: 'Switch is off',
             name: :show_me,
             type: :text,
-            visible: { name: :hide_and_seek, is: :equal, value: false },
+            hidden: { name: :hide_and_seek, is: :equal, value: false },
             value: 'hi !'
           },
           {
             title: 'hello ?',
             name: :hide_me,
             type: :info,
-            visible: ':show_me not contains "hello"'
+            hidden: ':show_me not contains "hello"'
           }
         ]
       },

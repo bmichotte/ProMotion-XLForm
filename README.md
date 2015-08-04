@@ -266,7 +266,7 @@ Finally, you can provide a PM::Validator with a `valid?(cell)` method.
       title: 'Appear when switch is on',
       name: :show_me,
       type: :info,
-      visible: {
+      hidden: {
         # the cell name wich will "trigger" the visibility
         name: :hide_and_seek,
 
@@ -282,7 +282,7 @@ Finally, you can provide a PM::Validator with a `valid?(cell)` method.
       type: :info,
 
       # you can also write it this way
-      visible: ':hide_and_seek == false'
+      hidden: ':hide_and_seek == false'
       # also valid ':some_text contains "a text"'
       #            ':some_text not contains "a text"'
     }
@@ -292,7 +292,6 @@ Finally, you can provide a PM::Validator with a `valid?(cell)` method.
 
 
 ## Todo
-- Validations
 - Tests
 - A lot of other things :)
 

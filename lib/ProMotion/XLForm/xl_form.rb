@@ -116,23 +116,11 @@ module ProMotion
           cell.selectorTitle   = cell_data[:selector_title] if cell_data[:selector_title]
           cell.options = cell_data[:options]
 
-          value = cell_data[:value]
-          if value and cell.selectorOptions
-            cell.selectorOptions.each do |opt|
-              if opt.formValue == value
-                value = opt
-                break
-              end
-            end
-          end
-
-          cell.value = value
-
           cell.disabled = !cell_data[:enabled] if cell_data[:enabled]
 
           # row visible
-          if cell_data[:visible]
-            predicate = cell_data[:visible]
+          if cell_data[:hidden]
+            predicate = cell_data[:hidden]
             if predicate.is_a?(Hash)
               tag = predicate[:name]
               operand = case predicate[:is]
@@ -223,6 +211,22 @@ module ProMotion
               end
             end
           end
+
+          value = cell_data[:value]
+          if value and cell.selectorOptions
+            cell.selectorOptions.each do |opt|
+              if opt.formValue == value
+                value = opt
+                break
+              end
+            end
+          end
+
+          if value === true or value === false
+            value = value ? 1 : 0
+          end
+
+          cell.value = value
 
           section.addFormRow(cell)
 
