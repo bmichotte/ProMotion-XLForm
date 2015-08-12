@@ -57,6 +57,13 @@ class TestFormScreen < PM::XLFormScreen
             title:   'Options',
             name:    'options',
             type:    :selector_push,
+            appearance: {
+              font: UIFont.fontWithName('Helvetica Neue', size: 15.0),
+              detail_font: UIFont.fontWithName('Helvetica Neue', size: 12.0),
+              color: UIColor.greenColor,
+              detail_color: UIColor.blueColor,
+              background_color: UIColor.grayColor
+            },
             options: {
               "value_1" => "Value 1",
               "value_2" => "Value 2",
@@ -73,6 +80,9 @@ class TestFormScreen < PM::XLFormScreen
             title:      'A slider',
             name:       :slider,
             type:       :slider,
+            appearance: {
+              "slider.tintColor" => UIColor.redColor
+            },
             properties: {
               max:  100,
               min:  2,

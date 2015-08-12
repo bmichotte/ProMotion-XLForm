@@ -116,7 +116,7 @@ module ProMotion
           cell.selectorTitle   = cell_data[:selector_title] if cell_data[:selector_title]
           cell.options = cell_data[:options]
 
-          cell.disabled = !cell_data[:enabled] if cell_data[:enabled]
+          cell.disabled = !cell_data.fetch(:enabled, true)
 
           # row visible
           if cell_data[:hidden]
@@ -209,6 +209,20 @@ module ProMotion
               if validator
                 cell.addValidator(validator)
               end
+            end
+          end
+
+          # customization
+          appearance = cell_data[:appearance]
+          if appearance
+            cell.cellConfig["textLabel.font"] = appearance[:font] if appearance[:font]
+            cell.cellConfig["textLabel.textColor"] = appearance[:color] if appearance[:color]
+            cell.cellConfig["detailTextLabel.font"] = appearance[:detail_font] if appearance[:detail_font]
+            cell.cellConfig["detailTextLabel.textColor"] = appearance[:detail_color] if appearance[:detail_color]
+            cell.cellConfig["backgroundColor"] = appearance[:background_color] if appearance[:background_color]
+
+            appearance.delete_if {|k,v| k.is_a?(Symbol)}.each do |k,v|
+              cell.cellConfig[k] = v
             end
           end
 

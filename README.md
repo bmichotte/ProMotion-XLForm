@@ -290,10 +290,39 @@ Finally, you can provide a PM::Validator with a `valid?(cell)` method.
 }
 ```
 
+### Appearance
+You can change the appearance of the cell using the `appearance` hash
 
-## Todo
-- Tests
-- A lot of other things :)
+```ruby
+{
+  title:   'Options',
+  name:    'options',
+  type:    :selector_push,
+  appearance: {
+    font: UIFont.fontWithName('Helvetica Neue', size: 15.0),
+    detail_font: UIFont.fontWithName('Helvetica Neue', size: 12.0),
+    color: UIColor.greenColor,
+    detail_color: UIColor.blueColor,
+    background_color: UIColor.grayColor
+  },
+  options: {
+    "value_1" => "Value 1",
+    "value_2" => "Value 2",
+    "value_3" => "Value 3",
+    "value_4" => "Value 4",
+  }
+}
+```
+
+You can also pass any key-value to configure your cell. Take a look at [this](https://github.com/xmartlabs/XLForm#additional-configuration-of-rows) for more information
+
+```ruby
+{
+  appearance: {
+    "slider.tintColor" => UIColor.grayColor
+  }
+}
+```
 
 ## Contributing
 

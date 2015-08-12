@@ -103,6 +103,7 @@ module ProMotion
         alert         = UIAlertView.new
         alert.title   = NSLocalizedString('Error', nil)
         alert.message = errors.join(', ')
+        alert.addButtonWithTitle(NSLocalizedString('OK', nil))
         alert.show
       end
     end
