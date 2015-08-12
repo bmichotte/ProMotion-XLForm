@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/clearsightstudio/ProMotion.git
-  revision: e0101b3da641373148166d238a6ada7307dbb78d
+  revision: 1d09ab7c13c396b56466733d261bbcefd0f5739a
   branch: master
   specs:
     ProMotion (2.4.2)
@@ -10,7 +10,7 @@ GIT
 PATH
   remote: .
   specs:
-    ProMotion-XLForm (0.0.6)
+    ProMotion-XLForm (0.0.7)
       ProMotion (~> 2.0)
       motion-cocoapods (~> 1.4)
 
@@ -58,7 +58,7 @@ GEM
     json (1.8.3)
     methadone (1.9.1)
       bundler
-    minitest (5.7.0)
+    minitest (5.8.0)
     molinillo (0.3.1)
     motion-cocoapods (1.7.3)
       cocoapods (>= 0.34)
