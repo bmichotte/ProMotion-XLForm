@@ -70,7 +70,11 @@ class TestFormScreen < PM::XLFormScreen
               "value_3" => "Value 3",
               "value_4" => "Value 4",
             },
-            value:   "value_1"
+            value:   "value_1",
+            on_change: -> (old_value, new_value) {
+              mp old_value: old_value,
+                 new_value: new_value
+            }
           }
         ]
       },

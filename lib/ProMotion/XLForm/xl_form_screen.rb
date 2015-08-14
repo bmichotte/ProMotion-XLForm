@@ -108,6 +108,14 @@ module ProMotion
       end
     end
 
+    def section_with_tag(tag)
+      if tag.respond_to? :to_s
+        tag = tag.to_s
+      end
+      self.form.formSections.select { |section| section.multivaluedTag and section.multivaluedTag == tag }
+                            .first
+    end
+
     def cell_with_tag(tag)
       if tag.respond_to? :to_s
         tag = tag.to_s
@@ -202,28 +210,32 @@ module ProMotion
     end
 
     ## XLFormDescriptorDelegate
-    def formSectionHasBeenAdded(section, atIndex: _)
+    def formSectionHasBeenAdded(section, atIndex: index)
       super
-      callback = @form_builder.get_callback(section, :on_add)
-      callback.call if callback
+      action = @form_builder.get_callback(section, :on_add)
+      return if action.nil?
+      trigger_action(action, row, index_path)
     end
 
-    def formSectionHasBeenRemoved(section, atIndex: _)
+    def formSectionHasBeenRemoved(section, atIndex: index)
       super
-      callback = @form_builder.get_callback(section, :on_remove)
-      callback.call if callback
+      action = @form_builder.get_callback(section, :on_remove)
+      return if action.nil?
+      trigger_action(action, section, index)
     end
 
-    def formRowHasBeenAdded(row, atIndexPath: _)
+    def formRowHasBeenAdded(row, atIndexPath: index_path)
       super
-      callback = @form_builder.get_callback(row, :on_add)
-      callback.call if callback
+      action = @form_builder.get_callback(row, :on_add)
+      return if action.nil?
+      trigger_action(action, row, index_path)
     end
 
-    def formRowHasBeenRemoved(row, atIndexPath: _)
+    def formRowHasBeenRemoved(row, atIndexPath: index_path)
       super
-      callback = @form_builder.get_callback(row, :on_remove)
-      callback.call if callback
+      action = @form_builder.get_callback(row, :on_remove)
+      return if action.nil?
+      trigger_action(action, row, index_path)
     end
 
     def formRowDescriptorValueHasChanged(row, oldValue: old_value, newValue: new_value)
@@ -241,5 +253,26 @@ module ProMotion
       end
     end
 
+    def formRowFormMultivaluedFormSection(section)
+      if section.multivaluedRowTemplate
+        cell_data = section.multivaluedRowTemplate.cell_data
+      else
+        cell_data = section.section_data[:cells].first
+      end
+
+      cell = @form_builder.create_cell(cell_data)
+      cell
+    end
+
+    private
+    def trigger_action(action, section_or_row, index_path)
+      case arity = action.arity
+      when 0 then action.call # Just call the proc or the method
+      when 2 then action.call(section_or_row, index_path) # Send arguments and index path
+      else
+        mp("Action should not have optional parameters: #{action.to_s}", force_color: :yellow) if arity < 0
+        action.call(section_or_row)
+      end
+    end
   end
 end
