@@ -87,62 +87,7 @@ module ProMotion
 
       # row visible
       if cell_data[:hidden]
-        predicate = cell_data[:hidden]
-        if predicate.is_a?(Hash)
-          tag = predicate[:name]
-          operand = case predicate[:is]
-            when :equal
-              '=='
-            when :not_equal
-              '!='
-            when :contains
-              'contains'
-            when :not_contains
-              'not contains'
-            else
-              predicate[:is]
-            end
-          value = predicate[:value]
-        else
-          match = /(:?[a-zA-Z_]+)\s+(==|!=|contains|not contains)\s+(.*)/.match(predicate)
-          if match and match.length == 4
-            # todo better than ignore ?
-            tag = match[1]
-            operand = match[2]
-            value = match[3]
-            if value =~ /"(.*)"/
-              value = value[1, value.length - 2]
-            end
-          end
-        end
-
-        if tag and operand
-          if tag.is_a?(Symbol)
-            tag = tag.to_s
-          elsif tag.start_with?(':')
-            tag[0] = ''
-          end
-          value = case value
-            when 'true', :true, true
-              0
-            when 'false', :false, false
-              1
-            when String
-              "\"#{value}\""
-            else
-              value
-            end
-
-          if operand == 'contains'
-            cell.hidden = "$#{tag} contains[c] #{value}"
-          elsif operand == 'not contains'
-            cell.hidden = "not($#{tag} contains[c] #{value})"
-          else
-            cell.hidden = "$#{tag} #{operand} #{value}"
-          end
-        else
-          mp "#{cell_data[:visible]} can not be parsed", force_color: :red
-        end
+        configure_hidden(cell, cell_data[:hidden])
       end
 
       # validators

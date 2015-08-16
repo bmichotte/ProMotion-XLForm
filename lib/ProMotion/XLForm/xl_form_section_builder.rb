@@ -24,6 +24,11 @@ module ProMotion
       add_proc tag, :on_add, section_data[:on_add] if section_data[:on_add]
       add_proc tag, :on_remove, section_data[:on_remove] if section_data[:on_remove]
 
+      # section visible
+      if section_data[:hidden]
+        configure_hidden(section, section_data[:hidden])
+      end
+
       section_data[:cells].each do |cell_data|
         cell = create_cell(cell_data)
 

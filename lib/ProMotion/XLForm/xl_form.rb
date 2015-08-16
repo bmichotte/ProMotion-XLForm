@@ -1,6 +1,7 @@
 module ProMotion
   class XLForm
 
+    include ProMotion::XLFormHelper
     include ProMotion::XLFormCellBuilder
     include ProMotion::XLFormSectionBuilder
 
