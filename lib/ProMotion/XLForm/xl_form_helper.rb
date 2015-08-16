@@ -2,8 +2,6 @@ module ProMotion
   module XLFormHelper
 
     def configure_hidden(cell_or_section, predicate)
-      mp configure: cell_or_section,
-          predicate:predicate
       if predicate.is_a?(Hash)
         tag = predicate[:name]
         operand = case predicate[:is]
