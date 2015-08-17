@@ -290,6 +290,20 @@ Finally, you can provide a PM::Validator with a `valid?(cell)` method.
 }
 ```
 
+### Buttons and click
+You can add `:on_click` on `:button` which accepts 0 or 1 argument (the cell).
+```ruby
+{
+  title: 'Click me',
+  name: :click_me,
+  type: :button,
+  on_click: -> (cell) {
+    mp "You clicked me"
+  }
+}
+```
+
+
 ### Appearance
 You can change the appearance of the cell using the `appearance` hash
 

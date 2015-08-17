@@ -49,6 +49,14 @@ class TestFormScreen < PM::XLFormScreen
             }
           },
           {
+            title: 'Click me',
+            name: :click_me,
+            type: :button,
+            on_click: -> (cell) {
+              mp "You clicked me"
+            }
+          },
+          {
             title: 'Yes ?',
             name:  'check',
             type:  :switch

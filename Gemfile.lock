@@ -63,6 +63,7 @@ GEM
     motion-cocoapods (1.7.3)
       cocoapods (>= 0.34)
     motion-redgreen (0.1.0)
+    motion-stump (0.3.2)
     motion_print (1.2.0)
     nap (0.8.0)
     netrc (0.7.8)
@@ -83,6 +84,7 @@ DEPENDENCIES
   ProMotion-XLForm!
   motion-cocoapods
   motion-redgreen (~> 0.1)
+  motion-stump (~> 0.3)
   rake
 
 BUNDLED WITH

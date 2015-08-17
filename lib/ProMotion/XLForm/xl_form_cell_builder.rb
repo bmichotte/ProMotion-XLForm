@@ -80,6 +80,21 @@ module ProMotion
       add_proc tag, :on_add, cell_data[:on_add] if cell_data[:on_add]
       add_proc tag, :on_remove, cell_data[:on_remove] if cell_data[:on_remove]
 
+      # button clicks
+      if cell_data[:type] == :button && cell_data[:on_click]
+        cell.action.formBlock = -> (cell) {
+          action = cell_data[:on_click]
+          case action.arity
+          when 0
+          action.call
+          when 1
+            action.call(cell)
+          else
+            mp(":on_click take 0 or 1 argument", force_color: :red)
+          end
+        }
+      end
+
       cell.selectorTitle = cell_data[:selector_title] if cell_data[:selector_title]
       cell.options = cell_data[:options]
 
