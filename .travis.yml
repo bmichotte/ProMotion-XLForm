@@ -2,6 +2,8 @@ language: objective-c
 osx_image: xcode6.4
 before_install:
     - (ruby --version)
+    - sudo chown -R travis ~/Library/RubyMotion
+    - mkdir -p ~/Library/RubyMotion/build
     - sudo motion update
 gemfile:
   - Gemfile
@@ -9,4 +11,4 @@ script:
     - bundle install
     - bundle exec rake pod:install > /dev/null
     - bundle exec rake clean
-    - bundle exec rake spec --trace
+    - bundle exec rake spec
