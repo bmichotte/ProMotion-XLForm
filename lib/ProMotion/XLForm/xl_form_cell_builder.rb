@@ -21,7 +21,13 @@ module ProMotion
       properties = cell_data[:properties] || {}
 
       # placeholder
-      cell.cellConfigAtConfigure.setObject(cell_data[:placeholder], forKey: "textField.placeholder") if cell_data[:placeholder]
+      if cell_data[:placeholder]
+        if type == :textview
+          cell.cellConfigAtConfigure.setObject(cell_data[:placeholder], forKey: "textView.placeholder")
+        else
+          cell.cellConfigAtConfigure.setObject(cell_data[:placeholder], forKey: "textField.placeholder")
+        end
+      end
 
       # step_counter
       if cell_data[:type] == :step_counter
