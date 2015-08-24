@@ -27,7 +27,7 @@ module ProMotion
 
     def get_callback(descriptor, event)
       tag = descriptor.respond_to?(:multivaluedTag) ? descriptor.multivaluedTag : descriptor.tag
-      return if @blocks.nil? or @blocks[tag].nil? or @blocks[tag][event].nil?
+      return if @blocks.nil? || @blocks[tag].nil? || @blocks[tag][event].nil?
 
       @blocks[tag][event]
     end

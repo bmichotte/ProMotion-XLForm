@@ -201,7 +201,7 @@ class XLFormImageSelectorCell < XLFormBaseCell
     setImageValue(imageToUse)
 
     if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad
-      if @popover_controller and @popover_controller.isPopoverVisible
+      if @popover_controller && @popover_controller.isPopoverVisible
         @popover_controller.dismissPopoverAnimated(true)
       end
     else

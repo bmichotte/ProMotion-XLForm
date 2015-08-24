@@ -69,7 +69,7 @@ class XLFormColorSelectorCell < XLFormBaseCell
 
   def update
     super.tap do
-      self.textLabel.text = (self.rowDescriptor.isRequired and self.rowDescriptor.title) ? "#{self.rowDescriptor.title}*" : self.rowDescriptor.title
+      self.textLabel.text = (self.rowDescriptor.isRequired && self.rowDescriptor.title) ? "#{self.rowDescriptor.title}*" : self.rowDescriptor.title
       @color_view.frame = [[305.0, 7.0], [80.0, 30.0]]
       color = self.rowDescriptor.value
       unless color

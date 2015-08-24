@@ -32,7 +32,7 @@ class XLFormRowDescriptor
   end
 
   def parse_options(options)
-    return nil if options.nil? or options.empty?
+    return nil if options.nil? || options.empty?
 
     options.map do |key, text|
       val = key

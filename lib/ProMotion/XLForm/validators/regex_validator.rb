@@ -8,7 +8,7 @@ module ProMotion
     end
 
     def valid?(row)
-      return nil if row.nil? or row.value.nil? or !row.value.is_a?(String)
+      return nil if row.nil? || row.value.nil? || !row.value.is_a?(String)
 
       !@regex.match(row.value).nil?
     end

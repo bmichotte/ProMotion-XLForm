@@ -11,7 +11,7 @@ module ProMotion
                 if tag.respond_to? :to_s
                   tag = tag.to_s
                 end
-                if rowDescriptor and rowDescriptor.value and rowDescriptor.value[tag]
+                if rowDescriptor && rowDescriptor.value && rowDescriptor.value[tag]
                   cell.merge({ value: rowDescriptor.value[tag] })
                 else
                   cell

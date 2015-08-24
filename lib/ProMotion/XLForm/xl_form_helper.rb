@@ -2,6 +2,7 @@ module ProMotion
   module XLFormHelper
 
     def configure_hidden(cell_or_section, predicate)
+      tag = operand = value = nil
       if predicate.is_a?(Hash)
         tag = predicate[:name]
         operand = case predicate[:is]
@@ -19,7 +20,7 @@ module ProMotion
         value = predicate[:value]
       else
         match = /(:?[a-zA-Z_]+)\s+(==|!=|contains|not contains)\s+(.*)/.match(predicate)
-        if match and match.length == 4
+        if match && match.length == 4
           # todo better than ignore ?
           tag = match[1]
           operand = match[2]
@@ -30,7 +31,7 @@ module ProMotion
         end
       end
 
-      if tag and operand
+      if tag && operand
         if tag.is_a?(Symbol)
           tag = tag.to_s
         elsif tag.start_with?(':')
@@ -38,7 +39,7 @@ module ProMotion
         end
         value = case value
           when nil
-            "nil"
+            'nil'
           when 'true', :true, true
             0
           when 'false', :false, false
@@ -57,7 +58,7 @@ module ProMotion
           cell_or_section.hidden = "$#{tag} #{operand} #{value}"
         end
       else
-        mp "#{data[:visible]} can not be parsed", force_color: :red
+        mp predicate: predicate.inspect, message: "predicate can not be parsed", force_color: :red
       end
     end
   end

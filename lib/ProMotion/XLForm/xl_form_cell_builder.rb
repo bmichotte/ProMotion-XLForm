@@ -9,7 +9,7 @@ module ProMotion
       end
       title = cell_data[:title]
       type  = cell_data[:type]
-      if type.nil? and cell_data[:cells]
+      if type.nil? && cell_data[:cells]
         type = :selector_push
       end
 
@@ -125,7 +125,7 @@ module ProMotion
           when :url
             ProMotion::UrlValidator.validator
           else
-            if value.is_a?(ProMotion::Validator) or value.respond_to?(:isValid)
+            if value.is_a?(ProMotion::Validator) || value.respond_to?(:isValid)
               value
             else
               mp "Invalid validator : #{key}", force_color: :red
@@ -154,7 +154,7 @@ module ProMotion
       end
 
       value = cell_data[:value]
-      if value and cell.selectorOptions
+      if value && cell.selectorOptions
         cell.selectorOptions.each do |opt|
           if opt.formValue == value
             value = opt
@@ -163,7 +163,7 @@ module ProMotion
         end
       end
 
-      if value === true or value === false
+      if value === true || value === false
         value = value ? 1 : 0
       end
 

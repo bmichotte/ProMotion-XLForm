@@ -112,7 +112,7 @@ module ProMotion
       if tag.respond_to? :to_s
         tag = tag.to_s
       end
-      self.form.formSections.select { |section| section.multivaluedTag and section.multivaluedTag == tag }
+      self.form.formSections.select { |section| section.multivaluedTag && section.multivaluedTag == tag }
                             .first
     end
 
@@ -260,8 +260,7 @@ module ProMotion
         cell_data = section.section_data[:cells].first
       end
 
-      cell = @form_builder.create_cell(cell_data)
-      cell
+      @form_builder.create_cell(cell_data)
     end
 
     private
