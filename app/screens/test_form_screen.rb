@@ -255,3 +255,19 @@ class NumberValidator < ProMotion::Validator
     row.value == "1"
   end
 end
+
+class MyCustomCell < PM::XLFormCell
+  def initWithStyle(style, reuseIdentifier: reuse_identifier)
+    super.tap do
+      @label = UILabel.new
+      self.contentView.addSubview(@label)
+    end
+  end
+
+  def update
+    super
+
+    @label.text = value
+    @label.sizeToFit
+  end
+end
