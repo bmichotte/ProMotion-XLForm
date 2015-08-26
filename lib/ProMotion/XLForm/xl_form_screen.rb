@@ -68,10 +68,7 @@ module ProMotion
     def values
       values = {}
       formValues.each do |key, value|
-        if value.is_a? XLFormOptionsObject
-          value = value.formValue
-        end
-        values[key] = value
+        values[key] = clean_value(value)
       end
 
       values
@@ -281,6 +278,16 @@ module ProMotion
           mp("Action should not have optional parameters: #{action.to_s}", force_color: :yellow) if arity < 0
           action.call(section_or_row)
       end
+    end
+
+    def clean_value(value)
+      if value.is_a? XLFormOptionsObject
+        value = value.formValue
+      elsif value.is_a? Array
+        value = value.map { |v| clean_value(v) }
+      end
+
+      value
     end
   end
 end
