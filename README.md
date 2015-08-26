@@ -125,7 +125,8 @@ end
 
 ### Getting values
 
-You can get the values of your form with `values`. You can also get validation errors with `validation_errors` and check if the form is valid with `valid?`
+You can get the values of your form with `values`. You can also get validation errors with `validation_errors` and check if the form is valid with `valid?`.
+You can also get a specific value with `value_for_cell(:my_cell)`.
 
 ### Events
 
@@ -216,6 +217,36 @@ end
 ```
 
 For a more advanced custom selector, you can set `view_controller_class:`. See [XLForm documentation](https://github.com/xmartlabs/XLForm/#custom-selectors---selector-row-with-a-custom-selector-view-controller) for more informations.
+
+### Cell
+
+You can use your own cell by providing `cell_class`
+
+```ruby
+{
+  title: 'MyCustomCell',
+  name: :custom_cell,
+  cell_class: MyCustomCell
+}
+
+class MyCustomCell < PM::XLFormCell
+  def initWithStyle(style, reuseIdentifier: reuse_identifier)
+    super.tap do
+      @label = UILabel.new
+      self.contentView.addSubview(@label)
+    end
+  end
+
+  def update
+    super
+
+    @label.text = value
+    @label.sizeToFit
+  end
+end
+```
+
+In your cell, you can set the value with `self.value=` and get the value with `self.value`
 
 ### Validators
 

@@ -155,4 +155,14 @@ describe 'ProMotion::XLFormScreen' do
     views(UISlider).first.tintColor.should == UIColor.redColor
   end
 
+  it "should allow a custom cell" do
+    cell = @form_screen.cell_with_tag(:custom_cell)
+    cell.cellForFormController(@form_screen).should.be.kind_of(MyCustomCell)
+  end
+
+  it "should have Hello as value" do
+    value = @form_screen.value_for_cell(:custom_cell)
+    value.should == 'Hello'
+  end
+
 end

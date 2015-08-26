@@ -77,6 +77,13 @@ module ProMotion
       values
     end
 
+    def value_for_cell(tag)
+      if tag.respond_to?(:to_s)
+        tag = tag.to_s
+      end
+      values.has_key?(tag) ? values[tag] : nil
+    end
+
     def valid?
       validation_errors.empty?
     end
