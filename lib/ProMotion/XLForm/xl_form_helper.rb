@@ -6,17 +6,17 @@ module ProMotion
       if predicate.is_a?(Hash)
         tag = predicate[:name]
         operand = case predicate[:is]
-          when :equal
-            '=='
-          when :not_equal
-            '!='
-          when :contains
-            'contains'
-          when :not_contains
-            'not contains'
-          else
-            predicate[:is]
-          end
+                    when :equal
+                      '=='
+                    when :not_equal
+                      '!='
+                    when :contains
+                      'contains'
+                    when :not_contains
+                      'not contains'
+                    else
+                      predicate[:is]
+                  end
         value = predicate[:value]
       else
         match = /(:?[a-zA-Z_]+)\s+(==|!=|contains|not contains)\s+(.*)/.match(predicate)
@@ -38,17 +38,17 @@ module ProMotion
           tag[0] = ''
         end
         value = case value
-          when nil
-            'nil'
-          when 'true', :true, true
-            0
-          when 'false', :false, false
-            1
-          when String
-            "\"#{value}\""
-          else
-            value
-          end
+                  when nil
+                    'nil'
+                  when 'true', :true, true
+                    0
+                  when 'false', :false, false
+                    1
+                  when String
+                    "\"#{value}\""
+                  else
+                    value
+                end
 
         if operand == 'contains'
           cell_or_section.hidden = "$#{tag} contains[c] #{value}"

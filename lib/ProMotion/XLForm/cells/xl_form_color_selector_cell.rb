@@ -19,10 +19,10 @@ class XLFormColorSelectorCell < XLFormBaseCell
       self.formViewController.view.endEditing(true)
 
       size = if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad
-        [400, 440]
-      else
-        [320, 440]
-      end
+               [400, 440]
+             else
+               [320, 440]
+             end
       color_chooser = PMXLColorChooser.alloc.initWithFrame [[0, 0], size]
       color_chooser.delegate = self
       color_chooser.color = self.rowDescriptor.value || UIColor.whiteColor
@@ -34,9 +34,9 @@ class XLFormColorSelectorCell < XLFormBaseCell
         @popover.popoverContentSize = color_chooser.frame.size
         f = self.contentView.convertRect(@color_view.frame, toView: self.formViewController.view)
         @popover.presentPopoverFromRect(f,
-                                        inView:                   self.formViewController.view,
+                                        inView: self.formViewController.view,
                                         permittedArrowDirections: UIPopoverArrowDirectionAny,
-                                        animated:                 true)
+                                        animated: true)
       else
         controller = UIViewController.new
         controller.view = color_chooser
@@ -44,19 +44,19 @@ class XLFormColorSelectorCell < XLFormBaseCell
         navigation_controller = UINavigationController.alloc.initWithRootViewController(controller)
         navigation_controller.navigationBar.translucent = false
         right = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemDone,
-                                                                 target: self,
-                                                                 action: 'hide_picker:')
+                                                                  target: self,
+                                                                  action: 'hide_picker:')
         controller.navigationItem.rightBarButtonItem = right
         if self.formViewController.presentedViewController
           self.formViewController.dismissViewControllerAnimated(true,
-              completion: -> {
-                self.formViewController.presentViewController(navigation_controller,
-                                                              animated:   true,
-                                                              completion: nil)
-              })
+                                                                completion: -> {
+                                                                  self.formViewController.presentViewController(navigation_controller,
+                                                                                                                animated: true,
+                                                                                                                completion: nil)
+                                                                })
         else
           self.formViewController.presentViewController(navigation_controller,
-                                                        animated:   true,
+                                                        animated: true,
                                                         completion: nil)
         end
       end
@@ -148,8 +148,8 @@ class PMXLBrightnessSlider < UISlider
     self.userInteractionEnabled = true
 
     self.addTarget(self,
-                  action: 'slider_value_changed:',
-                  forControlEvents: UIControlEventValueChanged)
+                   action: 'slider_value_changed:',
+                   forControlEvents: UIControlEventValueChanged)
   end
 
   def slider_value_changed(_)

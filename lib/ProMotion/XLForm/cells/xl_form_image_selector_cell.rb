@@ -4,11 +4,11 @@ class XLFormImageSelectorCell < XLFormBaseCell
 
   def configure
     super
-    @image_height        = 100.0
-    @image_width         = 100.0
-    self.selectionStyle  = UITableViewCellSelectionStyleNone
+    @image_height = 100.0
+    @image_width = 100.0
+    self.selectionStyle = UITableViewCellSelectionStyleNone
     self.backgroundColor = UIColor.whiteColor
-    self.separatorInset  = UIEdgeInsetsZero
+    self.separatorInset = UIEdgeInsetsZero
 
     self.contentView.addSubview(imageview)
     self.contentView.addSubview(text_label)
@@ -31,11 +31,11 @@ class XLFormImageSelectorCell < XLFormBaseCell
   def formDescriptorCellDidSelectedWithFormController(controller)
     if NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1
       alert = UIAlertController.alertControllerWithTitle(self.rowDescriptor.selectorTitle,
-                                                         message:        nil,
+                                                         message: nil,
                                                          preferredStyle: UIAlertControllerStyleActionSheet)
 
       alert.addAction(UIAlertAction.actionWithTitle(NSLocalizedString("Choose From Library", nil),
-                                                    style:   UIAlertActionStyleDefault,
+                                                    style: UIAlertActionStyleDefault,
                                                     handler: lambda { |_|
                                                       self.formViewController.dismissViewControllerAnimated(true,
                                                                                                             completion: -> {
@@ -45,7 +45,7 @@ class XLFormImageSelectorCell < XLFormBaseCell
 
       if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceTypeCamera)
         alert.addAction(UIAlertAction.actionWithTitle(NSLocalizedString("Take Photo", nil),
-                                                      style:   UIAlertActionStyleDefault,
+                                                      style: UIAlertActionStyleDefault,
                                                       handler: lambda { |_|
                                                         self.formViewController.dismissViewControllerAnimated(true,
                                                                                                               completion: -> {
@@ -65,16 +65,16 @@ class XLFormImageSelectorCell < XLFormBaseCell
     else
       if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceTypeCamera)
         action_sheet = UIActionSheet.alloc.initWithTitle(self.rowDescriptor.selectorTitle,
-                                                         delegate:               self,
-                                                         cancelButtonTitle:      NSLocalizedString("Cancel", nil),
+                                                         delegate: self,
+                                                         cancelButtonTitle: NSLocalizedString("Cancel", nil),
                                                          destructiveButtonTitle: nil,
-                                                         otherButtonTitles:      NSLocalizedString("Choose From Library", nil), NSLocalizedString("Take Photo", nil), nil)
+                                                         otherButtonTitles: NSLocalizedString("Choose From Library", nil), NSLocalizedString("Take Photo", nil), nil)
       else
         action_sheet = UIActionSheet.alloc.initWithTitle(self.rowDescriptor.selectorTitle,
-                                                         delegate:               self,
-                                                         cancelButtonTitle:      NSLocalizedString("Cancel", nil),
+                                                         delegate: self,
+                                                         cancelButtonTitle: NSLocalizedString("Cancel", nil),
                                                          destructiveButtonTitle: nil,
-                                                         otherButtonTitles:      NSLocalizedString("Choose From Library", nil), nil)
+                                                         otherButtonTitles: NSLocalizedString("Choose From Library", nil), nil)
       end
       action_sheet.tag = self.tag
       action_sheet.showInView(self.formViewController.view)
@@ -88,29 +88,29 @@ class XLFormImageSelectorCell < XLFormBaseCell
     self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-6-[text]", options: 0, metrics: 0, views: ui_components))
 
     self.contentView.addConstraint(NSLayoutConstraint.constraintWithItem(imageview,
-                                                                         attribute:  NSLayoutAttributeTop,
-                                                                         relatedBy:  NSLayoutRelationEqual,
-                                                                         toItem:     self.contentView,
-                                                                         attribute:  NSLayoutAttributeTop,
+                                                                         attribute: NSLayoutAttributeTop,
+                                                                         relatedBy: NSLayoutRelationEqual,
+                                                                         toItem: self.contentView,
+                                                                         attribute: NSLayoutAttributeTop,
                                                                          multiplier: 1.0,
-                                                                         constant:   10.0))
+                                                                         constant: 10.0))
 
     self.contentView.addConstraint(NSLayoutConstraint.constraintWithItem(imageview,
-                                                                         attribute:  NSLayoutAttributeBottom,
-                                                                         relatedBy:  NSLayoutRelationEqual,
-                                                                         toItem:     self.contentView,
-                                                                         attribute:  NSLayoutAttributeBottom,
+                                                                         attribute: NSLayoutAttributeBottom,
+                                                                         relatedBy: NSLayoutRelationEqual,
+                                                                         toItem: self.contentView,
+                                                                         attribute: NSLayoutAttributeBottom,
                                                                          multiplier: 1.0,
-                                                                         constant:   -10.0))
+                                                                         constant: -10.0))
 
     self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[image(width)]", options: 0, metrics: { "width" => @image_width }, views: ui_components))
     self.contentView.addConstraint(NSLayoutConstraint.constraintWithItem(imageview,
-                                                                         attribute:  NSLayoutAttributeCenterX,
-                                                                         relatedBy:  NSLayoutRelationEqual,
-                                                                         toItem:     self.contentView,
-                                                                         attribute:  NSLayoutAttributeCenterX,
+                                                                         attribute: NSLayoutAttributeCenterX,
+                                                                         relatedBy: NSLayoutRelationEqual,
+                                                                         toItem: self.contentView,
+                                                                         attribute: NSLayoutAttributeCenterX,
                                                                          multiplier: 1.0,
-                                                                         constant:   0.0))
+                                                                         constant: 0.0))
     super
   end
 
@@ -121,15 +121,15 @@ class XLFormImageSelectorCell < XLFormBaseCell
 
   def setImageValue(image)
     self.rowDescriptor.value = image
-    imageview.image          = image
+    imageview.image = image
   end
 
   def observeValueForKeyPath(key_path, ofObject: object, change: change, context: _)
     if object == text_label && key_path == "text"
       if change[NSKeyValueChangeKindKey] == NSKeyValueChangeSetting
         text_label.sizeToFit
-        frame            = text_label.frame
-        frame.origin     = [16, 4]
+        frame = text_label.frame
+        frame.origin = [16, 4]
         text_label.frame = frame
         self.contentView.needsUpdateConstraints
       end
@@ -157,10 +157,10 @@ class XLFormImageSelectorCell < XLFormBaseCell
   end
 
   def open_picker(source)
-    image_picker               = UIImagePickerController.alloc.init
-    image_picker.delegate      = self
+    image_picker = UIImagePickerController.alloc.init
+    image_picker.delegate = self
     image_picker.allowsEditing = true
-    image_picker.sourceType    = source
+    image_picker.sourceType = source
 
     if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad
       if @popover_controller && @popover_controller.isPopoverVisible
@@ -169,21 +169,21 @@ class XLFormImageSelectorCell < XLFormBaseCell
       @popover_controller = UIPopoverController.alloc.initWithContentViewController(image_picker)
       Dispatch::Queue.main.async do
         @popover_controller.presentPopoverFromRect(self.contentView.frame,
-                                                   inView:                   self.formViewController.view,
+                                                   inView: self.formViewController.view,
                                                    permittedArrowDirections: UIPopoverArrowDirectionAny,
-                                                   animated:                 true)
+                                                   animated: true)
       end
     else
       if self.formViewController.presentedViewController
         self.formViewController.dismissViewControllerAnimated(true,
                                                               completion: -> {
                                                                 self.formViewController.presentViewController(image_picker,
-                                                                                                              animated:   true,
+                                                                                                              animated: true,
                                                                                                               completion: nil)
                                                               })
       else
         self.formViewController.presentViewController(image_picker,
-                                                      animated:   true,
+                                                      animated: true,
                                                       completion: nil)
       end
     end
@@ -191,7 +191,7 @@ class XLFormImageSelectorCell < XLFormBaseCell
 
   # UIImagePickerControllerDelegate
   def imagePickerController(_, didFinishPickingMediaWithInfo: info)
-    editedImage   = info[UIImagePickerControllerEditedImage]
+    editedImage = info[UIImagePickerControllerEditedImage]
     originalImage = info[UIImagePickerControllerOriginalImage]
     if editedImage
       imageToUse = editedImage
@@ -213,9 +213,9 @@ class XLFormImageSelectorCell < XLFormBaseCell
   def imageview
     return @imageview if @imageview
 
-    @imageview                     = UIImageView.autolayoutView
+    @imageview = UIImageView.autolayoutView
     @imageview.layer.masksToBounds = true
-    @imageview.contentMode         = UIViewContentModeScaleAspectFit
+    @imageview.contentMode = UIViewContentModeScaleAspectFit
     @imageview
   end
 

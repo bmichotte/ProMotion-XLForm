@@ -2,48 +2,48 @@ class TestFormScreen < PM::XLFormScreen
 
   title "PM::XLFormScreen"
 
-  form_options required:  :asterisks,
-               on_save:   :'save_form:',
+  form_options required: :asterisks,
+               on_save: :'save_form:',
                on_cancel: :cancel_form
 
   def form_data
     [
       {
-        title:  'Account information',
+        title: 'Account information',
         footer: 'Some help text',
-        cells:  [
+        cells: [
           {
-            title:       'Email',
-            name:        :email,
-            type:        :email,
+            title: 'Email',
+            name: :email,
+            type: :email,
             placeholder: 'Enter your email',
-            required:    true,
+            required: true,
             validators: {
               email: true
             }
           },
           {
-            title:       'Url',
-            name:        :url,
-            type:        :url,
+            title: 'Url',
+            name: :url,
+            type: :url,
             placeholder: 'Enter an url',
-            required:    true,
+            required: true,
             validators: {
               url: true
             }
           },
           {
             title: 'Only letters',
-            name:  :letters,
-            type:  :text,
+            name: :letters,
+            type: :text,
             validators: {
               regex: { regex: /^[a-zA-Z]+$/, message: 'Invalid name' }
             }
           },
           {
             title: 'One',
-            name:  :only_one,
-            type:  :text,
+            name: :only_one,
+            type: :text,
             validators: {
               custom: NumberValidator.new
             }
@@ -58,13 +58,13 @@ class TestFormScreen < PM::XLFormScreen
           },
           {
             title: 'Yes ?',
-            name:  'check',
-            type:  :switch
+            name: 'check',
+            type: :switch
           },
           {
-            title:   'Options',
-            name:    'options',
-            type:    :selector_push,
+            title: 'Options',
+            name: 'options',
+            type: :selector_push,
             appearance: {
               font: UIFont.fontWithName('Helvetica Neue', size: 15.0),
               detail_font: UIFont.fontWithName('Helvetica Neue', size: 12.0),
@@ -78,7 +78,7 @@ class TestFormScreen < PM::XLFormScreen
               "value_3" => "Value 3",
               "value_4" => "Value 4",
             },
-            value:   "value_1",
+            value: "value_1",
             on_change: -> (old_value, new_value) {
               mp old_value: old_value,
                  new_value: new_value
@@ -89,58 +89,75 @@ class TestFormScreen < PM::XLFormScreen
       {
         cells: [
           {
-            title:      'A slider',
-            name:       :slider,
-            type:       :slider,
+            title: 'A slider',
+            name: :slider,
+            type: :slider,
             appearance: {
               "slider.tintColor" => UIColor.redColor
             },
             properties: {
-              max:  100,
-              min:  2,
+              max: 100,
+              min: 2,
               step: 4
             }
           },
           {
             title: 'A date',
-            name:  :date,
-            type:  :date_inline
+            name: :date,
+            type: :date_inline
           },
           {
-            title:      'Another date',
-            name:       :other_date,
-            type:       :date_inline,
+            title: 'Another date',
+            name: :other_date,
+            type: :date_inline,
             properties: {
               min: NSDate.new
             }
+          },
+          {
+            title: 'Multiple',
+            name: :multiple,
+            type: :multiple_selector,
+            options: {
+              :roses => 'Roses are #FF0000',
+              :violets => 'Violets are #0000FF',
+              :base => 'All my base',
+              :belong => 'are belong to you.'
+            }
+          },
+          {
+            title: 'Custom cell',
+            name: :custom_cell,
+            cell_class: MyCustomCell,
+            value: 'Hello'
           }
         ]
       },
       {
-        name:    'images',
-        cells:   [
+        name: 'images',
+        cells: [
           {
             title: 'An image',
-            name:  :picture,
-            type:  :image
+            name: :picture,
+            type: :image
           }
         ]
       },
       {
-        title:   'Multi-value',
-        name:    'multi',
+        title: 'Multi-value',
+        name: 'multi',
         options: [:insert, :delete, :reorder],
-        cells:   [
+        cells: [
           {
             title: 'Some text',
-            name:  :some_text,
-            type:  :text
+            name: :some_text,
+            type: :text
           }
         ]
       },
       {
         title: 'Subcells',
-        name:  :sub_cells,
+        name: :sub_cells,
         options: [:insert, :delete, :reorder],
         cells: [
           {
@@ -149,13 +166,13 @@ class TestFormScreen < PM::XLFormScreen
             cells: [
               {
                 title: 'Some text',
-                name:  :some_text,
-                type:  :text
+                name: :some_text,
+                type: :text
               },
               {
                 title: 'Other text',
-                name:  :some_other_text,
-                type:  :text
+                name: :some_other_text,
+                type: :text
               }
             ]
           }
@@ -163,7 +180,7 @@ class TestFormScreen < PM::XLFormScreen
       },
       {
         title: 'Subcells with custom transformer',
-        name:  :sub_cells,
+        name: :sub_cells,
         cells: [
           {
             title: 'Subcell',
@@ -172,13 +189,13 @@ class TestFormScreen < PM::XLFormScreen
             cells: [
               {
                 title: 'First text',
-                name:  :first_text,
-                type:  :text
+                name: :first_text,
+                type: :text
               },
               {
                 title: 'Second text',
-                name:  :second_text,
-                type:  :text
+                name: :second_text,
+                type: :text
               }
             ]
           }

@@ -43,7 +43,7 @@ module ProMotion
       self.should_autorotate
     end
 
-    def willRotateToInterfaceOrientation(orientation, duration:duration)
+    def willRotateToInterfaceOrientation(orientation, duration: duration)
       self.will_rotate(orientation, duration)
     end
 

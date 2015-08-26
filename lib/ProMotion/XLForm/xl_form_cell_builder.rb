@@ -8,7 +8,7 @@ module ProMotion
         tag = tag.to_s
       end
       title = cell_data[:title]
-      type  = cell_data[:type]
+      type = cell_data[:type]
       if type.nil? && cell_data[:cells]
         type = :selector_push
       end
@@ -31,8 +31,8 @@ module ProMotion
 
       # step_counter
       if cell_data[:type] == :step_counter
-        min  = properties[:min]
-        max  = properties[:max]
+        min = properties[:min]
+        max = properties[:max]
         step = properties[:step]
 
         cell.cellConfigAtConfigure.setObject(true, forKey: "stepControl.wraps")
@@ -43,8 +43,8 @@ module ProMotion
 
       # slider
       if cell_data[:type] == :slider
-        min  = properties[:min]
-        max  = properties[:max]
+        min = properties[:min]
+        max = properties[:max]
         step = properties[:step]
         cell.cellConfigAtConfigure.setObject(min, forKey: "slider.minimumValue") if min
         cell.cellConfigAtConfigure.setObject(max, forKey: "slider.maximumValue") if max
@@ -73,13 +73,13 @@ module ProMotion
       # subcells
       if cell_data[:cells]
         cell.action.viewControllerClass = ProMotion::XLSubFormScreen
-        cell.action.cells               = cell_data[:cells]
-        cell.valueTransformer           = ProMotion::ValueTransformer
+        cell.action.cells = cell_data[:cells]
+        cell.valueTransformer = ProMotion::ValueTransformer
       end
 
       # also accept default XLForm viewControllerClass
       cell.action.viewControllerClass = cell_data[:view_controller_class] if cell_data[:view_controller_class]
-      cell.valueTransformer           = cell_data[:value_transformer] if cell_data[:value_transformer]
+      cell.valueTransformer = cell_data[:value_transformer] if cell_data[:value_transformer]
 
       # callbacks
       add_proc tag, :on_change, cell_data[:on_change] if cell_data[:on_change]
@@ -91,12 +91,12 @@ module ProMotion
         cell.action.formBlock = -> (cell) {
           action = cell_data[:on_click]
           case action.arity
-          when 0
-          action.call
-          when 1
-            action.call(cell)
-          else
-            mp(":on_click take 0 or 1 argument", force_color: :red)
+            when 0
+              action.call
+            when 1
+              action.call(cell)
+            else
+              mp(":on_click take 0 or 1 argument", force_color: :red)
           end
         }
       end
@@ -116,28 +116,28 @@ module ProMotion
         validators = cell_data[:validators]
         validators.each do |key, value|
           validator = case key
-          when :email
-            XLFormValidator.emailValidator
-          when :regex
-            regex = value[:regex]
-            if regex.is_a?(String)
-              XLFormRegexValidator.formRegexValidatorWithMsg(value[:message], regex: regex)
-            elsif regex.is_a?(Regexp)
-              ProMotion::RegexValidator.validator(value[:message], regex)
-            else
-              mp "Invalid regex : #{regex.inspect}. Please provides a Regexp or a String", force_color: :red
-              nil
-            end
-          when :url
-            ProMotion::UrlValidator.validator
-          else
-            if value.is_a?(ProMotion::Validator) || value.respond_to?(:isValid)
-              value
-            else
-              mp "Invalid validator : #{key}", force_color: :red
-              nil
-            end
-          end
+                        when :email
+                          XLFormValidator.emailValidator
+                        when :regex
+                          regex = value[:regex]
+                          if regex.is_a?(String)
+                            XLFormRegexValidator.formRegexValidatorWithMsg(value[:message], regex: regex)
+                          elsif regex.is_a?(Regexp)
+                            ProMotion::RegexValidator.validator(value[:message], regex)
+                          else
+                            mp "Invalid regex : #{regex.inspect}. Please provides a Regexp or a String", force_color: :red
+                            nil
+                          end
+                        when :url
+                          ProMotion::UrlValidator.validator
+                        else
+                          if value.is_a?(ProMotion::Validator) || value.respond_to?(:isValid)
+                            value
+                          else
+                            mp "Invalid validator : #{key}", force_color: :red
+                            nil
+                          end
+                      end
 
           if validator
             cell.addValidator(validator)
@@ -154,7 +154,7 @@ module ProMotion
         cell.cellConfig["detailTextLabel.textColor"] = appearance[:detail_color] if appearance[:detail_color]
         cell.cellConfig["backgroundColor"] = appearance[:background_color] if appearance[:background_color]
 
-        appearance.delete_if {|k,v| k.is_a?(Symbol)}.each do |k,v|
+        appearance.delete_if { |k, v| k.is_a?(Symbol) }.each do |k, v|
           cell.cellConfig[k] = v
         end
       end

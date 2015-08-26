@@ -13,33 +13,33 @@ module ProMotion
 
       if form_options[:on_cancel]
         on_cancel = form_options[:on_cancel]
-        title     = NSLocalizedString('Cancel', nil)
-        item      = :cancel
+        title = NSLocalizedString('Cancel', nil)
+        item = :cancel
         if on_cancel.is_a? Hash
           title = on_cancel[:title] if on_cancel[:title]
-          item  = on_cancel[:item] if on_cancel[:item]
+          item = on_cancel[:item] if on_cancel[:item]
         end
 
         set_nav_bar_button :left, {
-                                    system_item: item,
-                                    title:       title,
-                                    action:      'on_cancel:'
+                                  system_item: item,
+                                  title: title,
+                                  action: 'on_cancel:'
                                 }
       end
 
       if form_options[:on_save]
         on_cancel = form_options[:on_save]
-        title     = NSLocalizedString('Save', nil)
-        item      = :save
+        title = NSLocalizedString('Save', nil)
+        item = :save
         if on_cancel.is_a? Hash
           title = on_cancel[:title] if on_cancel[:title]
-          item  = on_cancel[:item] if on_cancel[:item]
+          item = on_cancel[:item] if on_cancel[:item]
         end
 
         set_nav_bar_button :right, {
-                                     system_item: item,
-                                     title:       title,
-                                     action:      'on_save:'
+                                   system_item: item,
+                                   title: title,
+                                   action: 'on_save:'
                                  }
       end
 
@@ -53,16 +53,16 @@ module ProMotion
 
     def update_form_data
       form_options = self.class.get_form_options
-      title        = self.class.title
-      required     = form_options[:required]
+      title = self.class.title
+      required = form_options[:required]
 
       @form_builder = PM::XLForm.new(self.form_data,
                                      {
-                                         title:    title,
-                                         required: required
+                                       title: title,
+                                       required: required
                                      })
-      @form_object  = @form_builder.build
-      self.form     = @form_object
+      @form_object = @form_builder.build
+      self.form = @form_object
     end
 
     def values
@@ -98,17 +98,17 @@ module ProMotion
       end
 
       if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1
-        alert  = UIAlertController.alertControllerWithTitle(NSLocalizedString('Error', nil),
-                                                            message:        errors.join(', '),
-                                                            preferredStyle: UIAlertControllerStyleAlert)
+        alert = UIAlertController.alertControllerWithTitle(NSLocalizedString('Error', nil),
+                                                           message: errors.join(', '),
+                                                           preferredStyle: UIAlertControllerStyleAlert)
         action = UIAlertAction.actionWithTitle(NSLocalizedString('OK', nil),
-                                               style:   UIAlertActionStyleDefault,
+                                               style: UIAlertActionStyleDefault,
                                                handler: nil)
         alert.addAction(action)
         presentViewController(alert, animated: true, completion: nil)
       else
-        alert         = UIAlertView.new
-        alert.title   = NSLocalizedString('Error', nil)
+        alert = UIAlertView.new
+        alert.title = NSLocalizedString('Error', nil)
         alert.message = errors.join(', ')
         alert.addButtonWithTitle(NSLocalizedString('OK', nil))
         alert.show
@@ -120,7 +120,7 @@ module ProMotion
         tag = tag.to_s
       end
       self.form.formSections.select { |section| section.multivaluedTag && section.multivaluedTag == tag }
-                            .first
+        .first
     end
 
     def cell_with_tag(tag)
@@ -273,11 +273,13 @@ module ProMotion
     private
     def trigger_action(action, section_or_row, index_path)
       case arity = action.arity
-      when 0 then action.call # Just call the proc or the method
-      when 2 then action.call(section_or_row, index_path) # Send arguments and index path
-      else
-        mp("Action should not have optional parameters: #{action.to_s}", force_color: :yellow) if arity < 0
-        action.call(section_or_row)
+        when 0 then
+          action.call # Just call the proc or the method
+        when 2 then
+          action.call(section_or_row, index_path) # Send arguments and index path
+        else
+          mp("Action should not have optional parameters: #{action.to_s}", force_color: :yellow) if arity < 0
+          action.call(section_or_row)
       end
     end
   end

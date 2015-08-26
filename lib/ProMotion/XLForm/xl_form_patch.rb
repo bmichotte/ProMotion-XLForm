@@ -9,7 +9,7 @@ class XLFormAction
   def copyWithZone(zone)
     action_copy = old_copyWithZone(zone)
 
-    action_copy.cells    = self.cells.copy
+    action_copy.cells = self.cells.copy
     action_copy.required = self.required
     action_copy
   end
@@ -89,15 +89,15 @@ class XLFormSectionDescriptor
   def self.section_insert_mode(symbol)
     {
       last_row: XLFormSectionInsertModeLastRow,
-      button:   XLFormSectionInsertModeButton
+      button: XLFormSectionInsertModeButton
     }[symbol] || symbol || XLFormSectionInsertModeLastRow
   end
 
   def self.section_options(symbol)
     {
-      none:    XLFormSectionOptionNone,
-      insert:  XLFormSectionOptionCanInsert,
-      delete:  XLFormSectionOptionCanDelete,
+      none: XLFormSectionOptionNone,
+      insert: XLFormSectionOptionCanInsert,
+      delete: XLFormSectionOptionCanDelete,
       reorder: XLFormSectionOptionCanReorder
     }[symbol] || symbol || XLFormSectionOptionNone
   end
