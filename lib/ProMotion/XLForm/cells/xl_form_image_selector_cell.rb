@@ -29,7 +29,7 @@ class XLFormImageSelectorCell < XLFormBaseCell
   end
 
   def formDescriptorCellDidSelectedWithFormController(controller)
-    if NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1
+    if Kernel.const_defined?("UIAlertController")
       alert = UIAlertController.alertControllerWithTitle(self.rowDescriptor.selectorTitle,
                                                          message: nil,
                                                          preferredStyle: UIAlertControllerStyleActionSheet)
