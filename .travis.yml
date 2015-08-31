@@ -1,6 +1,7 @@
 language: objective-c
 osx_image: xcode6.4
 before_install:
+    - mkdir -p ~/Library/RubyMotion
     - (ruby --version)
     - sudo chown -R travis ~/Library/RubyMotion
     - mkdir -p ~/Library/RubyMotion/build
