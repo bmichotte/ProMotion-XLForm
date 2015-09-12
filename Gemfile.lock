@@ -1,16 +1,15 @@
 GIT
-  remote: https://github.com/clearsightstudio/ProMotion.git
-  revision: 1d09ab7c13c396b56466733d261bbcefd0f5739a
-  branch: master
+  remote: git://github.com/infinitered/ProMotion.git
+  revision: d343274bceb1feda5f81a790f0db6743d6ddf7f8
   specs:
-    ProMotion (2.4.2)
+    ProMotion (2.5.0.beta1)
       methadone (~> 1.7)
       motion_print (~> 1.0)
 
 PATH
   remote: .
   specs:
-    ProMotion-XLForm (0.0.7)
+    ProMotion-XLForm (0.0.8)
       ProMotion (~> 2.0)
       motion-cocoapods (~> 1.4)
 
@@ -88,4 +87,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   1.10.5
+   1.10.6
