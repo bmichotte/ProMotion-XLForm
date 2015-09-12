@@ -37,29 +37,30 @@ class XLFormImageSelectorCell < XLFormBaseCell
       alert.addAction(UIAlertAction.actionWithTitle(NSLocalizedString("Choose From Library", nil),
                                                     style: UIAlertActionStyleDefault,
                                                     handler: lambda { |_|
-                                                      self.formViewController.dismissViewControllerAnimated(true,
-                                                                                                            completion: -> {
-                                                                                                              open_picker(UIImagePickerControllerSourceTypePhotoLibrary)
-                                                                                                            })
+                                                      open_from_alert(UIImagePickerControllerSourceTypePhotoLibrary)
                                                     }))
 
       if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceTypeCamera)
         alert.addAction(UIAlertAction.actionWithTitle(NSLocalizedString("Take Photo", nil),
                                                       style: UIAlertActionStyleDefault,
                                                       handler: lambda { |_|
-                                                        self.formViewController.dismissViewControllerAnimated(true,
-                                                                                                              completion: -> {
-                                                                                                                open_picker(UIImagePickerControllerSourceTypeCamera)
-                                                                                                              })
+                                                        open_from_alert(UIImagePickerControllerSourceTypeCamera)
                                                       }))
       end
-      if self.formViewController.presentedViewController
-        self.formViewController.dismissViewControllerAnimated(true,
-                                                              completion: -> {
-                                                                self.formViewController.presentViewController(alert, animated: true, completion: nil)
-                                                              })
-      else
+
+      if 
+        alert.modalPresentationStyle = UIModalPresentationPopover
+        alert.popoverPresentationController.sourceView = self.contentView
+        alert.popoverPresentationController.sourceRect = self.contentView.bounds
+      end
+
+      present = -> {
         self.formViewController.presentViewController(alert, animated: true, completion: nil)
+      }
+      if self.formViewController.presentedViewController
+        self.formViewController.dismissViewControllerAnimated(true, completion: present)
+      else
+        present.call
       end
 
     else
@@ -148,44 +149,45 @@ class XLFormImageSelectorCell < XLFormBaseCell
 
     case title
       when NSLocalizedString("Choose From Library", nil)
-        open_picker(UIImagePickerControllerSourceTypePhotoLibrary)
+        open_from_alert(UIImagePickerControllerSourceTypePhotoLibrary)
       when NSLocalizedString("Take Photo", nil)
-        open_picker(UIImagePickerControllerSourceTypeCamera)
+        open_from_alert(UIImagePickerControllerSourceTypeCamera)
       else
         return
     end
   end
 
+  def open_from_alert(source)
+    open = -> {
+      open_picker(source)
+    }
+
+    if @popover_controller && @popover_controller.isPopoverVisible
+      @popover_controller.dismissPopoverAnimated(true)
+      open.call
+    elsif self.formViewController.presentedViewController
+      self.formViewController.dismissViewControllerAnimated(true, completion: open)
+    else
+      open.call
+    end
+  end
+
   def open_picker(source)
-    image_picker = UIImagePickerController.alloc.init
-    image_picker.delegate = self
-    image_picker.allowsEditing = true
-    image_picker.sourceType = source
+    @image_picker = UIImagePickerController.alloc.init
+    @image_picker.delegate = self
+    @image_picker.allowsEditing = true
+    @image_picker.sourceType = source
 
     if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad
-      if @popover_controller && @popover_controller.isPopoverVisible
-        @popover_controller.dismissPopoverAnimated(true)
-      end
-      @popover_controller = UIPopoverController.alloc.initWithContentViewController(image_picker)
-      Dispatch::Queue.main.async do
-        @popover_controller.presentPopoverFromRect(self.contentView.frame,
-                                                   inView: self.formViewController.view,
-                                                   permittedArrowDirections: UIPopoverArrowDirectionAny,
-                                                   animated: true)
-      end
+      @popover_controller = UIPopoverController.alloc.initWithContentViewController(@image_picker)
+      @popover_controller.presentPopoverFromRect(self.contentView.frame,
+                                                 inView: self.formViewController.view,
+                                                 permittedArrowDirections: UIPopoverArrowDirectionAny,
+                                                 animated: true)
     else
-      if self.formViewController.presentedViewController
-        self.formViewController.dismissViewControllerAnimated(true,
-                                                              completion: -> {
-                                                                self.formViewController.presentViewController(image_picker,
-                                                                                                              animated: true,
-                                                                                                              completion: nil)
-                                                              })
-      else
-        self.formViewController.presentViewController(image_picker,
-                                                      animated: true,
-                                                      completion: nil)
-      end
+      self.formViewController.presentViewController(@image_picker,
+                                                    animated: true,
+                                                    completion: nil)
     end
   end
 

@@ -107,7 +107,7 @@ module ProMotion
       cell.disabled = !cell_data.fetch(:enabled, true)
 
       # row visible
-      if cell_data[:hidden]
+      if cell_data.has_key?(:hidden)
         configure_hidden(cell, cell_data[:hidden])
       end
 
