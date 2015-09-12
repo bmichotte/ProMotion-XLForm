@@ -29,7 +29,7 @@ class XLFormImageSelectorCell < XLFormBaseCell
   end
 
   def formDescriptorCellDidSelectedWithFormController(controller)
-    if Kernel.const_defined?("UIAlertController")
+    if Kernel.const_defined?("UIAlertController") && UIAlertController.respond_to?(:'alertControllerWithTitle:message:preferredStyle:')
       alert = UIAlertController.alertControllerWithTitle(self.rowDescriptor.selectorTitle,
                                                          message: nil,
                                                          preferredStyle: UIAlertControllerStyleActionSheet)
