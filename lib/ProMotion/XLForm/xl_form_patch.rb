@@ -27,6 +27,10 @@ class XLFormRowDescriptor
     row_copy
   end
 
+  def enabled=(value)
+    self.disabled = !value
+  end
+
   def options=(options)
     self.selectorOptions = parse_options(options)
   end
