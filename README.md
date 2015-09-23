@@ -2,9 +2,6 @@
 
 ProMotion-XLForm provides a PM::XLFormScreen for [ProMotion](https://github.com/clearsightstudio/ProMotion) powered by the CocoaPod [XLForm](https://github.com/xmartlabs/XLForm).
 
-## Warning
-This gem is currently in very early-stage. Use it at your own risk :)
-
 [![Build Status](https://travis-ci.org/bmichotte/ProMotion-XLForm.svg?branch=master)](https://travis-ci.org/bmichotte/ProMotion-XLForm) [![Gem Version](https://badge.fury.io/rb/ProMotion-XLForm.svg)](http://badge.fury.io/rb/ProMotion-XLForm)
 
 ## Installation
