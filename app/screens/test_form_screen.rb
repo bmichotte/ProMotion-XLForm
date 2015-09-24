@@ -147,7 +147,8 @@ class TestFormScreen < PM::XLFormScreen
           {
             title: 'An image',
             name: :picture,
-            type: :image
+            type: :image,
+            value: UIImage.imageNamed('rubymotion-logo.png')
           }
         ]
       },
