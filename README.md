@@ -112,6 +112,7 @@ class TestFormScreen < PM::XLFormScreen
                on_cancel: :cancel_form # will be called when you touch cancel
 
    def save_form(values)
+     dismiss_keyboard
      mp values
    end
 
@@ -122,7 +123,8 @@ end
 
 ### Getting values
 
-You can get the values of your form with `values`. You can also get validation errors with `validation_errors` and check if the form is valid with `valid?`.
+You can get the values of your form with `values`. You can call `dismiss_keyboard` before before calling `values` to ensure you capture the input from the currently focused form element.
+You can also get validation errors with `validation_errors` and check if the form is valid with `valid?`.
 You can also get a specific value with `value_for_cell(:my_cell)`.
 
 ### Events
