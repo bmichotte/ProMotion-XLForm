@@ -1,27 +1,30 @@
-class XLFormColorSelectorCell < XLFormBaseCell
-  def configure
-    super.tap do
-      self.selectionStyle = UITableViewCellSelectionStyleNone
+module ProMotion
+  class XLFormColorSelectorCell < XLFormCell
+
+    def setup(data_cell, screen)
+      super
+ 
       @color_view = UIView.alloc.initWithFrame [[0, 0], [80, 30]]
       @color_view.contentMode = UIViewContentModeScaleAspectFit
       @color_view.layer.borderWidth = 1
       @color_view.layer.borderColor = UIColor.blackColor.CGColor
       @color_view.backgroundColor = UIColor.whiteColor
-      tap = UITapGestureRecognizer.alloc.initWithTarget(self, action: 'on_color_tap:')
-      self.addGestureRecognizer(tap)
-
       self.accessoryView = @color_view
-    end
-  end
 
-  def on_color_tap(_)
-    unless self.rowDescriptor.disabled
+      self.selectionStyle = UITableViewCellSelectionStyleNone
+      self.backgroundColor = UIColor.whiteColor
+      self.separatorInset = UIEdgeInsetsZero
+    end
+
+    def formDescriptorCellDidSelectedWithFormController(controller)
+      return if self.rowDescriptor.disabled
+
       self.formViewController.view.endEditing(true)
 
       size = if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad
                [400, 440]
              else
-               [320, 440]
+               UIScreen.mainScreen.bounds.size
              end
       color_chooser = PMXLColorChooser.alloc.initWithFrame [[0, 0], size]
       color_chooser.delegate = self
@@ -61,30 +64,24 @@ class XLFormColorSelectorCell < XLFormBaseCell
         end
       end
     end
-  end
 
-  def hide_picker(_)
-    self.formViewController.dismissViewControllerAnimated(true, completion: nil)
-  end
+    def hide_picker(_)
+      self.formViewController.dismissViewControllerAnimated(true, completion: nil)
+    end
 
-  def update
-    super.tap do
-      self.textLabel.text = (self.rowDescriptor.isRequired && self.rowDescriptor.title) ? "#{self.rowDescriptor.title}*" : self.rowDescriptor.title
-      @color_view.frame = [[305.0, 7.0], [80.0, 30.0]]
-      color = self.rowDescriptor.value
+    def update
+      color = value
       unless color
         color = UIColor.whiteColor
       end
-      @color_view.layer.borderColor = UIColor.blackColor.CGColor
       @color_view.backgroundColor = color
-      self.textLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
     end
-  end
 
-  def colorPickerDidChangeSelection(color_picker)
-    color = color_picker.selectionColor
-    @color_view.backgroundColor = color
-    self.rowDescriptor.value = color
+    def colorPickerDidChangeSelection(color_picker)
+      color = color_picker.selectionColor
+      @color_view.backgroundColor = color
+      self.value = color
+    end
   end
 end
 
