@@ -14,7 +14,6 @@ module ProMotion
       end
 
       cell = XLFormRowDescriptor.formRowDescriptorWithTag(tag, rowType: row_type(type), title: title)
-      cell.cell_data = cell_data
 
       cell.required = cell_data[:required]
 
@@ -64,6 +63,7 @@ module ProMotion
       # image
       if cell_data[:type] == :image
         cell_class = XLFormImageSelectorCell if cell_class.nil?
+        cell_data[:height] ||= 100
       elsif cell_data[:type] == :color
         cell_class = XLFormColorSelectorCell if cell_class.nil?
       end
@@ -174,6 +174,9 @@ module ProMotion
       end
 
       cell.value = value
+
+      # move this at the end so we can "override" some cell_data
+      cell.cell_data = cell_data
 
       cell
     end

@@ -129,7 +129,15 @@ class TestFormScreen < PM::XLFormScreen
             title: 'Custom cell',
             name: :custom_cell,
             cell_class: MyCustomCell,
-            value: 'Hello'
+            value: 'Hello',
+
+            # PM::TableViewCell stuff
+            height: 86,
+            selection_style: :none,
+            image: {
+              image: 'rubymotion-logo.png',
+              size: 30
+            }
           }
         ]
       },
@@ -274,17 +282,13 @@ class NumberValidator < ProMotion::Validator
 end
 
 class MyCustomCell < PM::XLFormCell
-  def initWithStyle(style, reuseIdentifier: reuse_identifier)
-    super.tap do
-      @label = UILabel.new
-      self.contentView.addSubview(@label)
-    end
-  end
 
   def update
     super
 
-    @label.text = value
-    @label.sizeToFit
+    self.data_cell ||= {}
+    self.data_cell[:subtitle] = value
+
+    set_subtitle
   end
 end

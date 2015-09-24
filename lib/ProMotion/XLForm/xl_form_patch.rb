@@ -46,6 +46,27 @@ class XLFormRowDescriptor
       XLFormOptionsObject.formOptionsObjectWithValue(val, displayText: text)
     end
   end
+
+  def cellForFormController(form_controller)
+    unless self.cell
+      cell_class = self.cellClass ? self.cellClass : XLFormViewController.cellClassesForRowDescriptorTypes[self.rowType]
+      if cell_class.is_a?(String)
+        bundle = NSBundle.bundleForClass(cell_class.to_s)
+        if bundle.pathForResource(cell_class, ofType: "nib")
+          self.cell = bundle.loadNibNamed(cell_class, owner: nil, options: nil).first
+        end
+      else
+        self.cell = cell_class.alloc.initWithStyle(self.cellStyle, reuseIdentifier: nil)
+      end
+
+      if self.cell && self.cell.respond_to?(:setup)
+        self.cell.setup(cell_data, form_controller) 
+      end
+      self.configureCellAtCreationTime
+    end
+    
+    self.cell 
+  end
 end
 
 class XLFormSectionDescriptor

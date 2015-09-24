@@ -127,7 +127,7 @@ module ProMotion
       self.form.formRowWithTag(tag)
     end
 
-    def cell_with_path(path)
+    def cell_at_path(path)
       self.form.formRowAtIndex(path)
     end
 
@@ -269,6 +269,19 @@ module ProMotion
       end
 
       @form_builder.create_cell(cell_data)
+    end
+
+    # override XLFormViewController
+    def tableView(table_view, heightForRowAtIndexPath: index_path)
+      row = cell_at_path(index_path)
+      cell = row.cellForFormController(self)
+      cell_class = cell.class
+      if cell_class.respond_to?(:formDescriptorCellHeightForRowDescriptor)
+        return cell_class.formDescriptorCellHeightForRowDescriptor(row)
+      elsif row.respond_to?(:cell_data) && row.cell_data[:height]
+        return row.cell_data[:height]
+      end
+      self.tableView.rowHeight
     end
 
     private
