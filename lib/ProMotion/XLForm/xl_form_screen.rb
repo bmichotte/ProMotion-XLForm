@@ -284,6 +284,11 @@ module ProMotion
       self.tableView.rowHeight
     end
 
+    # dismiss keyboard
+    def dismiss_keyboard
+      self.view.endEditing true
+    end
+
     private
     def trigger_action(action, section_or_row, index_path)
       case arity = action.arity
