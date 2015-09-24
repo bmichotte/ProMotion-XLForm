@@ -188,6 +188,11 @@ module ProMotion
     def enabled?
       !self.form.isDisabled
     end
+    
+    # dismiss keyboard
+    def dismiss_keyboard
+      self.view.endEditing true
+    end
 
     protected
     def on_cancel(_)
@@ -282,11 +287,6 @@ module ProMotion
         return row.cell_data[:height]
       end
       self.tableView.rowHeight
-    end
-
-    # dismiss keyboard
-    def dismiss_keyboard
-      self.view.endEditing true
     end
 
     private
