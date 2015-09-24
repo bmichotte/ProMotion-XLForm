@@ -127,6 +127,10 @@ module ProMotion
       self.form.formRowWithTag(tag)
     end
 
+    def cell_with_path(path)
+      self.form.formRowAtIndex(path)
+    end
+
     def reload(cell)
       reloadFormRow(cell)
     end
