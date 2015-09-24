@@ -169,7 +169,7 @@ module ProMotion
         end
       end
 
-      if value === true || value === false
+      if value.is_a?(TrueClass) && (value === true || value === false)
         value = value ? 1 : 0
       end
 
