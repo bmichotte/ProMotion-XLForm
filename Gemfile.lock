@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    ProMotion-XLForm (0.0.9)
+    ProMotion-XLForm (0.0.10)
       ProMotion (~> 2.0)
       motion-cocoapods (~> 1.4)
 
