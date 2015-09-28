@@ -37,6 +37,8 @@ module ProMotion
         elsif tag.start_with?(':')
           tag[0] = ''
         end
+        tag += ".value.valueData" if predicate.is_a?(Hash) && predicate[:options]
+
         value = case value
                   when nil
                     'nil'
