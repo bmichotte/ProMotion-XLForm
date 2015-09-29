@@ -128,6 +128,21 @@ describe 'ProMotion::XLFormScreen' do
     hide_me.isHidden.should == false
   end
 
+  it "should play hide and seek with a selector" do
+    predicate = "$options.value.valueData == 'value_1'".formPredicate
+    show_me_selector = @form_screen.cell_with_tag(:show_me_selector)
+    show_me_selector.hidden.should == predicate
+    show_me_selector.isHidden.should == true
+
+    selector = @form_screen.cell_with_tag('options')
+    selector.value = 'value_2'
+    @form_screen.reload(selector)
+
+    @form_screen.reload(show_me_selector)
+
+    show_me_selector.isHidden.should == false
+  end
+
   it "should get a color" do
     color_cell = @form_screen.cell_with_tag(:color)
     color_cell.value.should == UIColor.blueColor

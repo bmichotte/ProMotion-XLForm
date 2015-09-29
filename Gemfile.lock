@@ -85,6 +85,3 @@ DEPENDENCIES
   motion-redgreen (~> 0.1)
   motion-stump (~> 0.3)
   rake
-
-BUNDLED WITH
-   1.10.6

@@ -231,7 +231,14 @@ class TestFormScreen < PM::XLFormScreen
             name: :hide_me,
             type: :info,
             hidden: ':show_me not contains "hello"'
-          }
+          },
+          {
+            title: 'Value 1 ?',
+            name: :show_me_selector,
+            type: :text,
+            hidden: { name: :options, is: :equal, value: 'value_1', options: true },
+            value: 'is selected !'
+          },
         ]
       },
       {
