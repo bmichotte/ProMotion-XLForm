@@ -62,6 +62,12 @@ module ProMotion
         cell_class = XLFormColorSelectorCell if cell_class.nil?
       end
 
+      # image accessory
+      if cell_data[:image]
+        accessory_image = cell_data[:image].is_a?(UIImage) ? cell_data[:image] : UIImage.imageNamed(cell_data[:image])
+        cell.cellConfigAtConfigure.setObject(accessory_image, forKey: "image")
+      end
+
       cell.cellClass = cell_class if cell_class
 
       # subcells
