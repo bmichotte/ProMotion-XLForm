@@ -128,6 +128,21 @@ describe 'ProMotion::XLFormScreen' do
     hide_me.isHidden.should == false
   end
 
+  it "should play hide and seek with a selector" do
+    predicate = "$options.value.valueData == 'value_1'".formPredicate
+    show_me_selector = @form_screen.cell_with_tag(:show_me_selector)
+    show_me_selector.hidden.should == predicate
+    show_me_selector.isHidden.should == true
+
+    selector = @form_screen.cell_with_tag('options')
+    selector.value = 'value_2'
+    @form_screen.reload(selector)
+
+    @form_screen.reload(show_me_selector)
+
+    show_me_selector.isHidden.should == false
+  end
+
   it "should get a color" do
     color_cell = @form_screen.cell_with_tag(:color)
     color_cell.value.should == UIColor.blueColor
@@ -153,6 +168,16 @@ describe 'ProMotion::XLFormScreen' do
     cell = @form_screen.cell_with_tag(:slider)
     cell.cellConfig["slider.tintColor"].should == UIColor.redColor
     views(UISlider).first.tintColor.should == UIColor.redColor
+  end
+
+  it "should allow a custom cell" do
+    cell = @form_screen.cell_with_tag(:custom_cell)
+    cell.cellForFormController(@form_screen).should.be.kind_of(MyCustomCell)
+  end
+
+  it "should have Hello as value" do
+    value = @form_screen.value_for_cell(:custom_cell)
+    value.should == 'Hello'
   end
 
   it "should allow custom images to be set on the cell" do

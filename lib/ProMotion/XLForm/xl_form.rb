@@ -9,12 +9,12 @@ module ProMotion
 
     def initialize(form_data, opts={})
       @form_data = form_data
-      @title     = opts[:title] || ''
-      @required  = opts[:required]
+      @title = opts[:title] || ''
+      @required = opts[:required]
     end
 
     def build
-      form                                = XLFormDescriptor.formDescriptorWithTitle(@title)
+      form = XLFormDescriptor.formDescriptorWithTitle(@title)
       form.addAsteriskToRequiredRowsTitle = (@required == :asterisks)
 
       form_data.each do |section_data|
@@ -34,53 +34,53 @@ module ProMotion
 
     private
     def add_proc(tag, event, block)
-      @blocks             ||= {}
-      @blocks[tag]        ||= {}
+      @blocks ||= {}
+      @blocks[tag] ||= {}
       @blocks[tag][event] = block.respond_to?('weak!') ? block.weak! : block
     end
 
     def row_type(symbol)
       {
-          text:                        XLFormRowDescriptorTypeText,
-          name:                        XLFormRowDescriptorTypeName,
-          url:                         XLFormRowDescriptorTypeURL,
-          email:                       XLFormRowDescriptorTypeEmail,
-          password:                    XLFormRowDescriptorTypePassword,
-          number:                      XLFormRowDescriptorTypeNumber,
-          phone:                       XLFormRowDescriptorTypePhone,
-          twitter:                     XLFormRowDescriptorTypeTwitter,
-          account:                     XLFormRowDescriptorTypeAccount,
-          integer:                     XLFormRowDescriptorTypeInteger,
-          decimal:                     XLFormRowDescriptorTypeDecimal,
-          textview:                    XLFormRowDescriptorTypeTextView,
-          selector_push:               XLFormRowDescriptorTypeSelectorPush,
-          selector_popover:            XLFormRowDescriptorTypeSelectorPopover,
-          selector_action_sheet:       XLFormRowDescriptorTypeSelectorActionSheet,
-          selector_alert_view:         XLFormRowDescriptorTypeSelectorAlertView,
-          selector_picker_view:        XLFormRowDescriptorTypeSelectorPickerView,
-          selector_picker_view_inline: XLFormRowDescriptorTypeSelectorPickerViewInline,
-          multiple_selector:           XLFormRowDescriptorTypeMultipleSelector,
-          multiple_selector_popover:   XLFormRowDescriptorTypeMultipleSelectorPopover,
-          selector_left_right:         XLFormRowDescriptorTypeSelectorLeftRight,
-          selector_segmented_control:  XLFormRowDescriptorTypeSelectorSegmentedControl,
-          date_inline:                 XLFormRowDescriptorTypeDateInline,
-          datetime_inline:             XLFormRowDescriptorTypeDateTimeInline,
-          time_inline:                 XLFormRowDescriptorTypeTimeInline,
-          countdown_timer_inline:      XLFormRowDescriptorTypeCountDownTimerInline,
-          date:                        XLFormRowDescriptorTypeDate,
-          datetime:                    XLFormRowDescriptorTypeDateTime,
-          time:                        XLFormRowDescriptorTypeTime,
-          countdown_timer:             XLFormRowDescriptorTypeCountDownTimer,
-          datepicker:                  XLFormRowDescriptorTypeDatePicker,
-          picker:                      XLFormRowDescriptorTypePicker,
-          slider:                      XLFormRowDescriptorTypeSlider,
-          check:                       XLFormRowDescriptorTypeBooleanCheck,
-          switch:                      XLFormRowDescriptorTypeBooleanSwitch,
-          button:                      XLFormRowDescriptorTypeButton,
-          info:                        XLFormRowDescriptorTypeInfo,
-          step_counter:                XLFormRowDescriptorTypeStepCounter,
-          image:                       'XLFormRowDescriptorTypeImage',
-          color:                       'XLFormRowDescriptorTypeColor',
+        text: XLFormRowDescriptorTypeText,
+        name: XLFormRowDescriptorTypeName,
+        url: XLFormRowDescriptorTypeURL,
+        email: XLFormRowDescriptorTypeEmail,
+        password: XLFormRowDescriptorTypePassword,
+        number: XLFormRowDescriptorTypeNumber,
+        phone: XLFormRowDescriptorTypePhone,
+        twitter: XLFormRowDescriptorTypeTwitter,
+        account: XLFormRowDescriptorTypeAccount,
+        integer: XLFormRowDescriptorTypeInteger,
+        decimal: XLFormRowDescriptorTypeDecimal,
+        textview: XLFormRowDescriptorTypeTextView,
+        selector_push: XLFormRowDescriptorTypeSelectorPush,
+        selector_popover: XLFormRowDescriptorTypeSelectorPopover,
+        selector_action_sheet: XLFormRowDescriptorTypeSelectorActionSheet,
+        selector_alert_view: XLFormRowDescriptorTypeSelectorAlertView,
+        selector_picker_view: XLFormRowDescriptorTypeSelectorPickerView,
+        selector_picker_view_inline: XLFormRowDescriptorTypeSelectorPickerViewInline,
+        multiple_selector: XLFormRowDescriptorTypeMultipleSelector,
+        multiple_selector_popover: XLFormRowDescriptorTypeMultipleSelectorPopover,
+        selector_left_right: XLFormRowDescriptorTypeSelectorLeftRight,
+        selector_segmented_control: XLFormRowDescriptorTypeSelectorSegmentedControl,
+        date_inline: XLFormRowDescriptorTypeDateInline,
+        datetime_inline: XLFormRowDescriptorTypeDateTimeInline,
+        time_inline: XLFormRowDescriptorTypeTimeInline,
+        countdown_timer_inline: XLFormRowDescriptorTypeCountDownTimerInline,
+        date: XLFormRowDescriptorTypeDate,
+        datetime: XLFormRowDescriptorTypeDateTime,
+        time: XLFormRowDescriptorTypeTime,
+        countdown_timer: XLFormRowDescriptorTypeCountDownTimer,
+        datepicker: XLFormRowDescriptorTypeDatePicker,
+        picker: XLFormRowDescriptorTypePicker,
+        slider: XLFormRowDescriptorTypeSlider,
+        check: XLFormRowDescriptorTypeBooleanCheck,
+        switch: XLFormRowDescriptorTypeBooleanSwitch,
+        button: XLFormRowDescriptorTypeButton,
+        info: XLFormRowDescriptorTypeInfo,
+        step_counter: XLFormRowDescriptorTypeStepCounter,
+        image: 'XLFormRowDescriptorTypeImage',
+        color: 'XLFormRowDescriptorTypeColor',
       }[symbol] || symbol
     end
 

@@ -6,3 +6,4 @@
 .rake_tasks*
 .idea
 vendor
+.bundle

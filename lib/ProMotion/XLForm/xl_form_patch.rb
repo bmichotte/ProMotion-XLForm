@@ -9,7 +9,7 @@ class XLFormAction
   def copyWithZone(zone)
     action_copy = old_copyWithZone(zone)
 
-    action_copy.cells    = self.cells.copy
+    action_copy.cells = self.cells.copy
     action_copy.required = self.required
     action_copy
   end
@@ -27,6 +27,10 @@ class XLFormRowDescriptor
     row_copy
   end
 
+  def enabled=(value)
+    self.disabled = !value
+  end
+
   def options=(options)
     self.selectorOptions = parse_options(options)
   end
@@ -41,6 +45,27 @@ class XLFormRowDescriptor
       end
       XLFormOptionsObject.formOptionsObjectWithValue(val, displayText: text)
     end
+  end
+
+  def cellForFormController(form_controller)
+    unless self.cell
+      cell_class = self.cellClass ? self.cellClass : XLFormViewController.cellClassesForRowDescriptorTypes[self.rowType]
+      if cell_class.is_a?(String)
+        bundle = NSBundle.bundleForClass(cell_class.to_s)
+        if bundle.pathForResource(cell_class, ofType: "nib")
+          self.cell = bundle.loadNibNamed(cell_class, owner: nil, options: nil).first
+        end
+      else
+        self.cell = cell_class.alloc.initWithStyle(self.cellStyle, reuseIdentifier: nil)
+      end
+
+      if self.cell && self.cell.respond_to?(:setup)
+        self.cell.setup(cell_data, form_controller) 
+      end
+      self.configureCellAtCreationTime
+    end
+    
+    self.cell 
   end
 end
 
@@ -89,15 +114,15 @@ class XLFormSectionDescriptor
   def self.section_insert_mode(symbol)
     {
       last_row: XLFormSectionInsertModeLastRow,
-      button:   XLFormSectionInsertModeButton
+      button: XLFormSectionInsertModeButton
     }[symbol] || symbol || XLFormSectionInsertModeLastRow
   end
 
   def self.section_options(symbol)
     {
-      none:    XLFormSectionOptionNone,
-      insert:  XLFormSectionOptionCanInsert,
-      delete:  XLFormSectionOptionCanDelete,
+      none: XLFormSectionOptionNone,
+      insert: XLFormSectionOptionCanInsert,
+      delete: XLFormSectionOptionCanDelete,
       reorder: XLFormSectionOptionCanReorder
     }[symbol] || symbol || XLFormSectionOptionNone
   end

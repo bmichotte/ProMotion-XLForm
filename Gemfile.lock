@@ -1,23 +1,22 @@
 GIT
-  remote: https://github.com/clearsightstudio/ProMotion.git
-  revision: 1d09ab7c13c396b56466733d261bbcefd0f5739a
-  branch: master
+  remote: git://github.com/infinitered/ProMotion.git
+  revision: a40c03ca89e21c21ef4c2fc35d5d3b85ea4c77de
   specs:
-    ProMotion (2.4.2)
+    ProMotion (2.5.0.beta1)
       methadone (~> 1.7)
       motion_print (~> 1.0)
 
 PATH
   remote: .
   specs:
-    ProMotion-XLForm (0.0.7)
+    ProMotion-XLForm (0.0.10)
       ProMotion (~> 2.0)
       motion-cocoapods (~> 1.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.2.3)
+    activesupport (4.2.4)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -42,13 +41,13 @@ GEM
       activesupport (>= 3.2.15)
       fuzzy_match (~> 2.0.4)
       nap (~> 0.8.0)
-    cocoapods-downloader (0.9.1)
+    cocoapods-downloader (0.9.3)
     cocoapods-plugins (0.4.2)
       nap
     cocoapods-stats (0.5.3)
       nap (~> 0.8)
-    cocoapods-trunk (0.6.1)
-      nap (>= 0.8)
+    cocoapods-trunk (0.6.4)
+      nap (>= 0.8, < 2.0)
       netrc (= 0.7.8)
     cocoapods-try (0.4.5)
     colored (1.2)
@@ -58,9 +57,9 @@ GEM
     json (1.8.3)
     methadone (1.9.1)
       bundler
-    minitest (5.8.0)
+    minitest (5.8.1)
     molinillo (0.3.1)
-    motion-cocoapods (1.7.3)
+    motion-cocoapods (1.7.4)
       cocoapods (>= 0.34)
     motion-redgreen (0.1.0)
     motion-stump (0.3.2)
@@ -86,6 +85,3 @@ DEPENDENCIES
   motion-redgreen (~> 0.1)
   motion-stump (~> 0.3)
   rake
-
-BUNDLED WITH
-   1.10.5
