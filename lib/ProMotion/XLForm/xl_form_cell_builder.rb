@@ -69,7 +69,7 @@ module ProMotion
       end
 
       # image accessory
-      if cell_data[:image]
+      if cell_data[:image] && !cell_data[:image].is_a?(Hash)
         accessory_image = cell_data[:image].is_a?(UIImage) ? cell_data[:image] : UIImage.imageNamed(cell_data[:image])
         cell.cellConfigAtConfigure.setObject(accessory_image, forKey: "image")
       end
