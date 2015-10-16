@@ -21,9 +21,9 @@ describe 'ProMotion::XLFormScreen' do
     views(UITableView).first.numberOfSections.should == 8
   end
 
-  it "contains 1 section with 7 fields" do
+  it "contains 1 section with 8 fields" do
     tableview = views(UITableView).first
-    @form_screen.tableView(tableview, numberOfRowsInSection: 0).should == 7
+    @form_screen.tableView(tableview, numberOfRowsInSection: 0).should == 8
   end
 
   it "should not be valid" do
@@ -178,6 +178,12 @@ describe 'ProMotion::XLFormScreen' do
   it "should have Hello as value" do
     value = @form_screen.value_for_cell(:custom_cell)
     value.should == 'Hello'
+  end
+
+  it "should allow custom images to be set on the cell" do
+    tableview = views(UITableView).first
+    cell = @form_screen.tableView(tableview, cellForRowAtIndexPath: NSIndexPath.indexPathForRow(6, inSection:0))
+    cell.imageView.should.not.be.nil
   end
 
 end

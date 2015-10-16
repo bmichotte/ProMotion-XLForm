@@ -62,6 +62,12 @@ class TestFormScreen < PM::XLFormScreen
             type: :switch
           },
           {
+            title: 'Image',
+            name:  'image',
+            type:  :text,
+            image: "user",
+          },
+          {
             title: 'Options',
             name: 'options',
             type: :selector_push,
