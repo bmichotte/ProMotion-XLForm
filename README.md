@@ -26,36 +26,40 @@ To create a form, create a new `PM::XLFormScreen` and implement `form_data`.
 ```ruby
 class TestFormScreen < PM::XLFormScreen
   def form_data
-  [
-    {
-      title:  'Account information',
-      cells: [
-        {
-          title:       'Email',
-          name:        :email,
-          type:        :email,
-          placeholder: 'Enter your email',
-          required:    true
-        },
-        {
-          title: 'Name',
-          name:  :name,
-          type:  :text,
-          value: 'Default value'
-        },
-        {
-          title: 'Sex',
-          name: :sex,
-          type: :selector_push,
-          options: {
-            male: 'Male',
-            female: 'Female',
-            other: 'Other'
+    genders = [
+      { id: :male, name: 'Male' },
+      { id: :female, name: 'Female' },
+      { id: :other,  name: 'Other' },
+    ]
+
+    [
+      {
+        title:  'Account information',
+        cells: [
+          {
+            title:       'Email',
+            name:        :email,
+            type:        :email,
+            placeholder: 'Enter your email',
+            required:    true
+          },
+          {
+            title: 'Name',
+            name:  :name,
+            type:  :text,
+            value: 'Default value'
+          },
+          {
+            title: 'Gender',
+            name: :gender,
+            type: :selector_push,
+            options: Hash[genders.map do |gender|
+              [gender[:id], gender[:name]]
+            end]
           }
-        }
-      ]
-    }
-  ]
+        ]
+      }
+    ]
   end
 end
 ```
@@ -119,6 +123,31 @@ class TestFormScreen < PM::XLFormScreen
    def cancel_form
    end
 end
+```
+
+If you don't want the default navigation controller buttons, you could add something like
+
+```ruby
+
+form_options on_save: :my_save_method
+
+def form_data
+  [
+    {
+      title: 'Save',
+      name: :save,
+      type: :button,
+      on_click: -> (cell) {
+        on_save(nil)
+      }
+    }
+  ]
+end
+
+def my_save_method(values)
+  mp values
+end
+
 ```
 
 ### Getting values

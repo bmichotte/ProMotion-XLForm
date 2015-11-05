@@ -7,6 +7,13 @@ class TestFormScreen < PM::XLFormScreen
                on_cancel: :cancel_form
 
   def form_data
+    areas = [
+      { id: 'value_1',  name: 'Name 1' },
+      { id: 'value_2',  name: 'Name 2' },
+      { id: 'value_3',  name: 'Name 3' },
+      { id: 'value_4',  name: 'Name 4' },
+    ]
+
     [
       {
         title: 'Account information',
@@ -78,13 +85,10 @@ class TestFormScreen < PM::XLFormScreen
               detail_color: UIColor.blueColor,
               background_color: UIColor.grayColor
             },
-            options: {
-              "value_1" => "Value 1",
-              "value_2" => "Value 2",
-              "value_3" => "Value 3",
-              "value_4" => "Value 4",
-            },
-            value: "value_1",
+            options: Hash[areas.map do |area|
+              [area[:id], area[:name]]
+            end],
+            value: 'value_1',
             on_change: -> (old_value, new_value) {
               mp old_value: old_value,
                  new_value: new_value
