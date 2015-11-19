@@ -188,7 +188,7 @@ module ProMotion
     def enabled?
       !self.form.isDisabled
     end
-    
+
     # dismiss keyboard
     def dismiss_keyboard
       self.view.endEditing true
@@ -283,7 +283,7 @@ module ProMotion
       cell_class = cell.class
       if cell_class.respond_to?(:formDescriptorCellHeightForRowDescriptor)
         return cell_class.formDescriptorCellHeightForRowDescriptor(row)
-      elsif row.respond_to?(:cell_data) && row.cell_data[:height]
+      elsif row.respond_to?(:cell_data) && row.cell_data && row.cell_data[:height]
         return row.cell_data[:height]
       end
       self.tableView.rowHeight

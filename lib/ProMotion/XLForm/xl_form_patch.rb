@@ -60,17 +60,17 @@ class XLFormRowDescriptor
       end
 
       if self.cell && self.cell.respond_to?(:setup)
-        self.cell.setup(cell_data, form_controller) 
+        self.cell.setup(cell_data, form_controller)
       end
       self.configureCellAtCreationTime
     end
-    
-    self.cell 
+
+    self.cell
   end
 end
 
 class XLFormSectionDescriptor
-  attr_accessor :section_data, :options
+  attr_accessor :section_data
 
   def self.section(section_data)
     title = section_data[:title]
@@ -81,21 +81,26 @@ class XLFormSectionDescriptor
 
     section = XLFormSectionDescriptor.formSectionWithTitle(title, sectionOptions: options, sectionInsertMode: insert_mode)
     section.section_data = section_data
-    section.options = options
+
     section
   end
 
   def options=(value)
-    @options = self.class.parse_section_options(value)
+    @section_options = self.class.parse_section_options(value)
   end
 
-  def options
-    @options
-  end
+  # Since `sectionOptions` is a property on the Objective-C class and not a
+  # Ruby method we can't use `super` to fallback when overriding the method.
+  # To achieve the same thing we create an alias and use that instead.
+  alias :originalSectionOptions :sectionOptions
 
+  # This property/method is used in the Objective-C initializer and is called
+  # before we ever have a chance to set @section_options so we need to be able
+  # to fallback to the original.
   def sectionOptions
-    options
+    @section_options || originalSectionOptions
   end
+  alias_method :options, :sectionOptions
 
   def self.parse_section_options(options)
     return section_options(:none) if options.nil?
