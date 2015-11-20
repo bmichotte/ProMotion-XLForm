@@ -1,10 +1,14 @@
 module ProMotion
   class XLFormImageSelectorCell < XLFormCell
 
+    def self.formDescriptorCellHeightForRowDescriptor(_)
+      100
+    end
+
     def setup(data_cell, screen)
       super
 
-      size = (data_cell[:height] || 100) - 20 
+      size = (data_cell[:height] || 100) - 20
 
       @imageview = UIImageView.alloc.initWithFrame([[0, 0], [size, size]])
       self.accessoryView = @imageview
@@ -12,6 +16,7 @@ module ProMotion
       self.selectionStyle = UITableViewCellSelectionStyleNone
       self.backgroundColor = UIColor.whiteColor
       self.separatorInset = UIEdgeInsetsZero
+      self.editingAccessoryView = self.accessoryView
     end
 
     def update
@@ -45,7 +50,9 @@ module ProMotion
         end
 
         present = -> {
-          self.formViewController.presentViewController(alert, animated: true, completion: nil)
+          Dispatch::Queue.main.async do
+            self.formViewController.presentViewController(alert, animated: true, completion: nil)
+          end
         }
         if self.formViewController.presentedViewController
           self.formViewController.dismissViewControllerAnimated(true, completion: present)
@@ -116,10 +123,12 @@ module ProMotion
 
       if UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad
         @popover_controller = UIPopoverController.alloc.initWithContentViewController(@image_picker)
-        @popover_controller.presentPopoverFromRect(self.contentView.frame,
-                                                   inView: self.formViewController.view,
-                                                   permittedArrowDirections: UIPopoverArrowDirectionAny,
-                                                   animated: true)
+        Dispatch::Queue.main.async do
+          @popover_controller.presentPopoverFromRect(self.contentView.frame,
+                                                     inView: self.formViewController.view,
+                                                     permittedArrowDirections: UIPopoverArrowDirectionAny,
+                                                     animated: true)
+        end
       else
         self.formViewController.presentViewController(@image_picker,
                                                       animated: true,
@@ -136,7 +145,7 @@ module ProMotion
       else
         imageToUse = originalImage
       end
-      
+
       self.value = imageToUse
       @imageview.image = imageToUse
 
