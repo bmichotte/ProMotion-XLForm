@@ -17,8 +17,8 @@ describe 'ProMotion::XLFormScreen' do
     view("Some help text").should.not.be.nil
   end
 
-  it "contains 8 sections" do
-    views(UITableView).first.numberOfSections.should == 8
+  it "contains 9 sections" do
+    views(UITableView).first.numberOfSections.should == 9
   end
 
   it "contains 1 section with 8 fields" do

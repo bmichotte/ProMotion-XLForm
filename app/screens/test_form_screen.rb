@@ -175,6 +175,19 @@ class TestFormScreen < PM::XLFormScreen
         ]
       },
       {
+        title: 'Multi-value with XLFormSectionInsertModeButton',
+        name: 'multi',
+        options: [:insert, :delete, :reorder],
+        insert_mode: :button,
+        cells: [
+          {
+            title: 'Some text',
+            name: :some_text,
+            type: :text
+          }
+        ]
+      },
+      {
         title: 'Subcells',
         name: :sub_cells,
         options: [:insert, :delete, :reorder],
