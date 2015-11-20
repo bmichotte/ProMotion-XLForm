@@ -17,21 +17,17 @@ Motion::Project::App.setup do |app|
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_helper.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_cell_builder.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_section_builder.rb")
-  
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_cell.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_image_selector_cell.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_color_selector_cell.rb")
-
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/value_transformer.rb")
-  
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/validators/validator.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/validators/url_validator.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/validators/regex_validator.rb")
-
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/ui_alert_controller.rb")
 
   app.pods do
-    pod 'XLForm', '~> 3.0.0'
+    pod 'XLForm', :head
     pod 'RSColorPicker'
   end
 end
