@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    ProMotion-XLForm (0.0.10)
+    ProMotion-XLForm (0.0.11)
       ProMotion (~> 2.0)
       motion-cocoapods (~> 1.4)
 
@@ -85,3 +85,6 @@ DEPENDENCIES
   motion-redgreen (~> 0.1)
   motion-stump (~> 0.3)
   rake
+
+BUNDLED WITH
+   1.10.6
