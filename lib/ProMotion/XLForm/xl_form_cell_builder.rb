@@ -159,6 +159,7 @@ module ProMotion
         cell.cellConfig["detailTextLabel.font"] = appearance[:detail_font] if appearance[:detail_font]
         cell.cellConfig["detailTextLabel.textColor"] = appearance[:detail_color] if appearance[:detail_color]
         cell.cellConfig["backgroundColor"] = appearance[:background_color] if appearance[:background_color]
+        cell.cellConfig["textField.textAlignment"] = appearance[:alignment] if appearance[:alignment]
 
         appearance.delete_if { |k, v| k.is_a?(Symbol) }.each do |k, v|
           cell.cellConfig[k] = v

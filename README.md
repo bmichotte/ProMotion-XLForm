@@ -376,7 +376,8 @@ You can change the appearance of the cell using the `appearance` hash
     detail_font: UIFont.fontWithName('Helvetica Neue', size: 12.0),
     color: UIColor.greenColor,
     detail_color: UIColor.blueColor,
-    background_color: UIColor.grayColor
+    background_color: UIColor.grayColor,
+    alignment: NSTextAlignmentRight
   },
   options: {
     "value_1" => "Value 1",
