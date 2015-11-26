@@ -93,6 +93,14 @@ class TestFormScreen < PM::XLFormScreen
               mp old_value: old_value,
                  new_value: new_value
             }
+          },
+          {
+            title: 'Alignment',
+            name: :align,
+            type: :text,
+            appearance: {
+              alignment: :right
+            }
           }
         ]
       },

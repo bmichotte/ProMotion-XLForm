@@ -376,14 +376,21 @@ You can change the appearance of the cell using the `appearance` hash
     detail_font: UIFont.fontWithName('Helvetica Neue', size: 12.0),
     color: UIColor.greenColor,
     detail_color: UIColor.blueColor,
-    background_color: UIColor.grayColor,
-    alignment: NSTextAlignmentRight
+    background_color: UIColor.grayColor
   },
   options: {
     "value_1" => "Value 1",
     "value_2" => "Value 2",
     "value_3" => "Value 3",
     "value_4" => "Value 4",
+  }
+},
+{
+  title: 'Alignment',
+  name: :align,
+  type: :text,
+  appearance: {
+    alignment: :right # or NSTextAlignmentRight
   }
 }
 ```
