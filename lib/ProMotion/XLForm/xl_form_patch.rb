@@ -62,6 +62,10 @@ class XLFormRowDescriptor
       if self.cell && self.cell.respond_to?(:setup)
         self.cell.setup(cell_data, form_controller)
       end
+      if self.cell.respond_to?(:accessibilityLabel) && cell_data && cell_data[:title]
+        self.cell.accessibilityLabel = cell_data[:title]
+      end
+
       self.configureCellAtCreationTime
     end
 
