@@ -21,9 +21,9 @@ describe 'ProMotion::XLFormScreen' do
     views(UITableView).first.numberOfSections.should == 9
   end
 
-  it "contains 1 section with 8 fields" do
+  it "contains 1 section with 9 fields" do
     tableview = views(UITableView).first
-    @form_screen.tableView(tableview, numberOfRowsInSection: 0).should == 8
+    @form_screen.tableView(tableview, numberOfRowsInSection: 0).should == 9
   end
 
   it "should not be valid" do
