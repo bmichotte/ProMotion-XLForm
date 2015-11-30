@@ -18,7 +18,6 @@ Motion::Project::App.setup do |app|
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_cell_builder.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/xl_form_section_builder.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_cell.rb")
-  app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_image_selector_cell.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/cells/xl_form_color_selector_cell.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/value_transformer.rb")
   app.files << File.join(lib_dir_path, "ProMotion/XLForm/validators/validator.rb")

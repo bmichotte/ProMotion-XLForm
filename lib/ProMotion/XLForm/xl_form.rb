@@ -79,7 +79,7 @@ module ProMotion
         button: XLFormRowDescriptorTypeButton,
         info: XLFormRowDescriptorTypeInfo,
         step_counter: XLFormRowDescriptorTypeStepCounter,
-        image: 'XLFormRowDescriptorTypeImage',
+        image: XLFormRowDescriptorTypeImage,
         color: 'XLFormRowDescriptorTypeColor',
       }[symbol] || symbol
     end

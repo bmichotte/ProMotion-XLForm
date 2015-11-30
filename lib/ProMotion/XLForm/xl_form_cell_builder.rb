@@ -60,11 +60,7 @@ module ProMotion
 
       cell_class = cell_data[:cell_class]
 
-      # image
-      if cell_data[:type] == :image
-        cell_class = XLFormImageSelectorCell if cell_class.nil?
-        cell_data[:height] ||= 100
-      elsif cell_data[:type] == :color
+      if cell_data[:type] == :color
         cell_class = XLFormColorSelectorCell if cell_class.nil?
       end
 
