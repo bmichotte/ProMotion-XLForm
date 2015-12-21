@@ -263,7 +263,7 @@ module ProMotion
           new_value = new_value.formValue
         end
 
-        case arity = call_back.arity
+        case arity = callback.arity
           when 2 then
             callback.call(old_value, new_value)
           when 3 then
