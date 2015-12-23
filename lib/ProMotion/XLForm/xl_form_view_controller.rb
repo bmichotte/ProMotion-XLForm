@@ -1,5 +1,10 @@
 module ProMotion
   class XlFormViewController < XLFormViewController
+
+    def class_handles_delegates?
+      true
+    end
+
     def self.new(args = {})
       s = self.alloc.init
       s.screen_init(args) if s.respond_to?(:screen_init)
