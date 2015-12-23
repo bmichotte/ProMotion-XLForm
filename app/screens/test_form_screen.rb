@@ -117,7 +117,15 @@ class TestFormScreen < PM::XLFormScreen
               max: 100,
               min: 2,
               step: 4
-            }
+            },
+            # on_change: -> (old_value, new_value, row) {
+            #   mp old_value: old_value,
+            #      new_value: new_value
+            #   if old_value != new_value
+            #     row.setTitle("Slider at #{new_value}")
+            #     self.reloadFormRow(row) 
+            #   end
+            # }
           },
           {
             title: 'A date',

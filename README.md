@@ -170,10 +170,17 @@ You can also get a specific value with `value_for_cell(:my_cell)`.
     female: 'Female',
     other: 'Other'
   },
+  # An optional row paramater may be passed |old_value, new_value|
   on_change: lambda do |old_value, new_value|
     puts "Changed from #{old_value} to #{new_value}"
   end
 }
+# An optional row paramater may be passed to on_change:
+#  on_change: lambda do |old_value, new_value, row|
+#    puts "Changed from #{old_value} to #{new_value}"
+#    row.setTitle(new_value)
+#    self.reloadFormRow(row) if old_value != new_value
+#  end
 ```
 
 ### Multivalued Sections (Insert, Delete, Reorder rows)

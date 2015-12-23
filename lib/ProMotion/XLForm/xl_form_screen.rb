@@ -262,7 +262,17 @@ module ProMotion
         if new_value.is_a? XLFormOptionsObject
           new_value = new_value.formValue
         end
-        callback.call(old_value, new_value)
+
+        case arity = callback.arity
+          when 0 then
+            callback.call
+          when 2 then
+            callback.call(old_value, new_value)
+          when 3 then
+            callback.call(old_value, new_value, row)
+          else
+            mp("Callback requires 0, 2, or 3 paramters", force_color: :red)
+        end
       end
     end
 
