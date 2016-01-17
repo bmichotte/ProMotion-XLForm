@@ -413,6 +413,21 @@ You can also pass any key-value to configure your cell. Take a look at [this](ht
 }
 ```
 
+### Keyboard
+For the text based cells (like `:text`, `:password`, `:number`, `:integer`, `:decimal`), you can specify a `keyboard_type`. The following keyboard types are available :
+- :default
+- :ascii
+- :numbers_punctuation
+- :url
+- :number_pad
+- :phone_pad
+- :name_phone_pad
+- :email
+- :decimal_pad
+- :twitter
+- :web_search
+- :alphabet
+
 ## Contributing
 
 1. Fork it

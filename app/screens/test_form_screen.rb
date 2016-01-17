@@ -142,6 +142,13 @@ class TestFormScreen < PM::XLFormScreen
             }
           },
           {
+            title: 'Pin',
+            name: :pin,
+            type: :password,
+            placeholder: 'Enter your 4-digit PIN',
+            keyboard_type: :decimal_pad
+          },
+          {
             title: 'Multiple',
             name: :multiple,
             type: :multiple_selector,

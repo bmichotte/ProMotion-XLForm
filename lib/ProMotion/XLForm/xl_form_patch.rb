@@ -65,11 +65,31 @@ class XLFormRowDescriptor
       if self.cell.respond_to?(:accessibilityLabel) && cell_data && cell_data[:title]
         self.cell.accessibilityLabel = cell_data[:title]
       end
+      if self.cell.respond_to?(:keyboard_type) && cell_data[:keyboard_type]
+        self.cell.keyboard_type = keyboard_type(cell_data[:keyboard_type])
+      end
 
       self.configureCellAtCreationTime
     end
 
     self.cell
+  end
+
+  def keyboard_type(symbol)
+    {
+      default: UIKeyboardTypeDefault,
+      ascii: UIKeyboardTypeASCIICapable,
+      numbers_punctuation: UIKeyboardTypeNumbersAndPunctuation,
+      url: UIKeyboardTypeURL,
+      number_pad: UIKeyboardTypeNumberPad,
+      phone_pad: UIKeyboardTypePhonePad,
+      name_phone_pad: UIKeyboardTypeNamePhonePad,
+      email: UIKeyboardTypeEmailAddress,
+      decimal_pad: UIKeyboardTypeDecimalPad,
+      twitter: UIKeyboardTypeTwitter,
+      web_search: UIKeyboardTypeWebSearch,
+      alphabet: UIKeyboardTypeASCIICapable
+    }[symbol] || symbol || UIKeyboardTypeDefault
   end
 end
 
@@ -104,6 +124,7 @@ class XLFormSectionDescriptor
   def sectionOptions
     @section_options || originalSectionOptions
   end
+
   alias_method :options, :sectionOptions
 
   def self.parse_section_options(options)
@@ -134,5 +155,18 @@ class XLFormSectionDescriptor
       delete: XLFormSectionOptionCanDelete,
       reorder: XLFormSectionOptionCanReorder
     }[symbol] || symbol || XLFormSectionOptionNone
+  end
+end
+
+class XLFormTextFieldCell
+
+  attr_accessor :keyboard_type
+
+  alias :old_update :update
+
+  def update
+    old_update
+
+    self.textField.keyboardType = self.keyboard_type if self.keyboard_type
   end
 end
