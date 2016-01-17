@@ -11,11 +11,18 @@ module ProMotion
       @form_data = form_data
       @title = opts[:title] || ''
       @required = opts[:required]
+      @auto_focus = opts[:auto_focus]
     end
 
     def build
       form = XLFormDescriptor.formDescriptorWithTitle(@title)
       form.addAsteriskToRequiredRowsTitle = (@required == :asterisks)
+
+
+      # focus on this cell
+      if @auto_focus
+        form.assignFirstResponderOnShow = true
+      end
 
       form_data.each do |section_data|
         section = create_section(section_data)

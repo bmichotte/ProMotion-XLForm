@@ -113,7 +113,8 @@ class TestFormScreen < PM::XLFormScreen
 
   form_options required:  :asterisks, # add an asterisk to required fields
                on_save:   :'save_form:', # will be called when you touch save
-               on_cancel: :cancel_form # will be called when you touch cancel
+               on_cancel: :cancel_form, # will be called when you touch cancel
+               auto_focus: true # the form will focus on the first focusable field
 
    def save_form(values)
      dismiss_keyboard

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/infinitered/ProMotion.git
-  revision: b093c0208bf51ebbf338ea50cd73fdb6bf36cf62
+  revision: f2eae58619c695d21938d03af549b6cafe3eeec2
   specs:
     ProMotion (2.5.0)
       methadone (~> 1.7)
@@ -59,15 +59,15 @@ GEM
     methadone (1.9.2)
       bundler
     minitest (5.8.3)
-    molinillo (0.4.0)
-    motion-cocoapods (1.7.7)
+    molinillo (0.4.1)
+    motion-cocoapods (1.7.8)
       cocoapods (>= 0.34)
     motion-redgreen (0.1.0)
     motion-stump (0.3.2)
     motion_print (1.2.0)
     nap (1.0.0)
     netrc (0.7.8)
-    rake (10.4.2)
+    rake (10.5.0)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -88,4 +88,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

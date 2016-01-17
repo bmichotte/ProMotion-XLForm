@@ -21,10 +21,10 @@ module ProMotion
         end
 
         set_nav_bar_button :left, {
-                                  system_item: item,
-                                  title: title,
-                                  action: 'on_cancel:'
-                                }
+          system_item: item,
+          title: title,
+          action: 'on_cancel:'
+        }
       end
 
       if form_options[:on_save]
@@ -37,10 +37,10 @@ module ProMotion
         end
 
         set_nav_bar_button :right, {
-                                   system_item: item,
-                                   title: title,
-                                   action: 'on_save:'
-                                 }
+          system_item: item,
+          title: title,
+          action: 'on_save:'
+        }
       end
 
       self.form_added if self.respond_to?(:form_added)
@@ -55,12 +55,13 @@ module ProMotion
       form_options = self.class.get_form_options
       title = self.class.title
       required = form_options[:required]
+      auto_focus = form_options[:auto_focus]
 
       @form_builder = PM::XLForm.new(self.form_data,
-                                     {
-                                       title: title,
-                                       required: required
-                                     })
+                                     title: title,
+                                     required: required,
+                                     auto_focus: auto_focus
+      )
       @form_object = @form_builder.build
       self.form = @form_object
     end
