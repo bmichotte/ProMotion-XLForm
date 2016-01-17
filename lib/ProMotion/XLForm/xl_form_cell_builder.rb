@@ -13,6 +13,8 @@ module ProMotion
         type = :selector_push
       end
 
+      mp("Can't find the type #{type}, maybe a typo ?", force_color: :red) if row_type(type).nil? && !cell_data[:cell_class]
+
       cell = XLFormRowDescriptor.formRowDescriptorWithTag(tag, rowType: row_type(type), title: title)
 
       cell.required = cell_data[:required]

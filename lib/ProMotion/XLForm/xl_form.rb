@@ -88,7 +88,7 @@ module ProMotion
         step_counter: XLFormRowDescriptorTypeStepCounter,
         image: XLFormRowDescriptorTypeImage,
         color: 'XLFormRowDescriptorTypeColor',
-      }[symbol] || symbol
+      }[symbol]
     end
 
   end
