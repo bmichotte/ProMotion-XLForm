@@ -7,3 +7,4 @@
 .idea
 vendor
 .bundle
+.rbenv-gemsets
