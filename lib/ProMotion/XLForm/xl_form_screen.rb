@@ -43,6 +43,13 @@ module ProMotion
         }
       end
 
+      # support for RMQ stylesheet using `form_view`
+      # this is not optimal since set_stylesheet is called from
+      # viewDidLoad on RMQ but the tableView is initialized only after that
+      if self.class.rmq_style_sheet_class
+        self.tableView.rmq.apply_style(:form_view) if self.rmq.stylesheet.respond_to?(:form_view)
+      end
+
       self.form_added if self.respond_to?(:form_added)
     end
 

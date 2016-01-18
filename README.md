@@ -428,6 +428,14 @@ For the text based cells (like `:text`, `:password`, `:number`, `:integer`, `:de
 - :web_search
 - :alphabet
 
+### RMQ / RedPotion
+If you use [RMQ](https://github.com/infinitered/rmq) or [RedPotion](https://github.com/infinitered/redpotion), you can style the screen with
+```ruby
+def form_view(st)
+
+end
+```
+
 ## Contributing
 
 1. Fork it
