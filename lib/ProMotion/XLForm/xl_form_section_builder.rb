@@ -21,6 +21,10 @@ module ProMotion
 
       section.footerTitle = section_data[:footer] if section_data[:footer]
 
+      if section.multivaluedAddButton
+        section.multivaluedAddButton.title = section_data[:multi_add_title] if section_data[:multi_add_title]
+      end
+
       add_proc tag, :on_add, section_data[:on_add] if section_data[:on_add]
       add_proc tag, :on_remove, section_data[:on_remove] if section_data[:on_remove]
 
