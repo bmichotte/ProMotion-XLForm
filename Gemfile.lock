@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/infinitered/ProMotion.git
-  revision: f2eae58619c695d21938d03af549b6cafe3eeec2
+  revision: 439e81d8132856d70da9fe48c751437f14078545
   specs:
     ProMotion (2.5.0)
       methadone (~> 1.7)
@@ -9,14 +9,14 @@ GIT
 PATH
   remote: .
   specs:
-    ProMotion-XLForm (0.0.12)
+    ProMotion-XLForm (0.0.13)
       ProMotion (~> 2.0)
       motion-cocoapods (~> 1.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.2.5)
+    activesupport (4.2.5.1)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -58,14 +58,14 @@ GEM
     json (1.8.3)
     methadone (1.9.2)
       bundler
-    minitest (5.8.3)
-    molinillo (0.4.1)
+    minitest (5.8.4)
+    molinillo (0.4.2)
     motion-cocoapods (1.7.8)
       cocoapods (>= 0.34)
     motion-redgreen (0.1.0)
     motion-stump (0.3.2)
     motion_print (1.2.0)
-    nap (1.0.0)
+    nap (1.1.0)
     netrc (0.7.8)
     rake (10.5.0)
     thread_safe (0.3.5)
