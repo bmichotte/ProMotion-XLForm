@@ -69,6 +69,8 @@ class XLFormRowDescriptor
         self.cell.keyboard_type = keyboard_type(cell_data[:keyboard_type])
       end
 
+      self.cell.rowDescriptor = self
+
       self.configureCellAtCreationTime
     end
 
