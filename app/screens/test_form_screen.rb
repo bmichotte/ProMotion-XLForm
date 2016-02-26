@@ -96,6 +96,15 @@ class TestFormScreen < PM::XLFormScreen
             }
           },
           {
+            title: 'iPad Options',
+            name: 'ipad_options',
+            type: :selector_popover,
+            options: Hash[areas.map do |area|
+              [area[:id], area[:name]]
+            end],
+            value: 'value_1',
+          },
+          {
             title: 'Alignment',
             name: :align,
             type: :text,
