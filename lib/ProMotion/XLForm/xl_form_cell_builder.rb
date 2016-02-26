@@ -13,6 +13,11 @@ module ProMotion
         type = :selector_push
       end
 
+      if type == :selector_popover && UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad
+        mp("Trying to use :selector_popover when device is not an iPad. Falling back to :selector_push", force_color: :red) if RUBYMOTION_ENV && RUBYMOTION_ENV == "development"
+        type = :selector_push
+      end
+
       mp("Can't find the type #{type}, maybe a typo ?", force_color: :red) if row_type(type).nil? && !cell_data[:cell_class]
 
       cell = XLFormRowDescriptor.formRowDescriptorWithTag(tag, rowType: row_type(type), title: title)

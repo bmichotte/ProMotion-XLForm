@@ -9,9 +9,9 @@ describe 'ProMotion::XLFormScreen' do
   before { form_screen.update_form_data }
   after { @form_screen = nil }
 
-  it "contains a 'Account information' title" do
-    view("ACCOUNT INFORMATION").should.not.be.nil
-  end
+  # it "contains a 'Account information' title" do
+  #   view("ACCOUNT INFORMATION").should.not.be.nil
+  # end
 
   it "contains a section footer" do
     view("Some help text").should.not.be.nil
@@ -23,7 +23,7 @@ describe 'ProMotion::XLFormScreen' do
 
   it "contains 1 section with 9 fields" do
     tableview = views(UITableView).first
-    @form_screen.tableView(tableview, numberOfRowsInSection: 0).should == 9
+    @form_screen.tableView(tableview, numberOfRowsInSection: 0).should == 10
   end
 
   it "should not be valid" do
@@ -189,6 +189,15 @@ describe 'ProMotion::XLFormScreen' do
     tableview = views(UITableView).first
     cell = @form_screen.tableView(tableview, cellForRowAtIndexPath: NSIndexPath.indexPathForRow(6, inSection:0))
     cell.imageView.should.not.be.nil
+  end
+
+  it "should not allow a :selector_popover on iPhone" do
+    cell = @form_screen.cell_with_tag(:ipad_options)
+    if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+      cell.rowType.should == "selectorPopover"
+    else
+      cell.rowType.should == "selectorPush"
+    end
   end
 
 end
