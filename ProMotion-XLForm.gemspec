@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
   gem.name          = "ProMotion-XLForm"
-  gem.version       = "0.0.13"
+  gem.version       = "0.0.15"
   gem.authors       = ["Benjamin Michotte"]
   gem.email         = ["bmichotte@gmail.com"]
   gem.description   = %q{Adds XLForm screen support to ProMotion.}
