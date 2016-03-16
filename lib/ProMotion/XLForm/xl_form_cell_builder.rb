@@ -44,7 +44,7 @@ module ProMotion
         cell.cellConfigAtConfigure.setObject(true, forKey: "stepControl.wraps")
         cell.cellConfigAtConfigure.setObject(min, forKey: "stepControl.minimumValue") if min
         cell.cellConfigAtConfigure.setObject(max, forKey: "stepControl.maximumValue") if max
-        cell.cellConfigAtConfigure.setObject(step, forKey: "stepControl.maximumValue") if step
+        cell.cellConfigAtConfigure.setObject(step, forKey: "stepControl.stepValue") if step
       end
 
       # slider
