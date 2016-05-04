@@ -60,6 +60,7 @@ module ProMotion
         integer: XLFormRowDescriptorTypeInteger,
         decimal: XLFormRowDescriptorTypeDecimal,
         textview: XLFormRowDescriptorTypeTextView,
+        zip_code: XLFormRowDescriptorTypeZipCode,
         selector_push: XLFormRowDescriptorTypeSelectorPush,
         selector_popover: XLFormRowDescriptorTypeSelectorPopover,
         selector_action_sheet: XLFormRowDescriptorTypeSelectorActionSheet,
