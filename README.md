@@ -77,6 +77,7 @@ end
 * :integer
 * :decimal
 * :textview
+* :zip_code
 * :selector_push
 * :selector_popover
 * :selector_action_sheet
