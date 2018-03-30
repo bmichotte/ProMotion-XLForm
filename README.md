@@ -276,7 +276,13 @@ class MyValueTransformer < PM::ValueTransformer
 end
 ```
 
-For a more advanced custom selector, you can set `view_controller_class:`. See [XLForm documentation](https://github.com/xmartlabs/XLForm/#custom-selectors---selector-row-with-a-custom-selector-view-controller) for more informations.
+#### Custom Selector View Controller
+
+For a more advanced custom selector, you can set `view_controller_class:`. See [XLForm documentation](https://github.com/xmartlabs/XLForm/#custom-selectors---selector-row-with-a-custom-selector-view-controller) for more information.
+
+![Screenshot of Map Custom Selector](https://github.com/xmartlabs/XLForm/raw/master/Examples/Objective-C/Examples/Selectors/CustomSelectors/XLFormRowViewController/XLForm-map-custom-selector.gif)
+
+![Screenshot of Dynamic Custom Selector](https://github.com/xmartlabs/XLForm/raw/master/Examples/Objective-C/Examples/Selectors/DynamicSelector/XLForm-dynamic-custom-selector.gif)
 
 ### Cell
 
