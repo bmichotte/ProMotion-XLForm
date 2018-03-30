@@ -278,11 +278,49 @@ end
 
 #### Custom Selector View Controller
 
-For a more advanced custom selector, you can set `view_controller_class:`. See [XLForm documentation](https://github.com/xmartlabs/XLForm/#custom-selectors---selector-row-with-a-custom-selector-view-controller) for more information.
+For a more advanced custom selector, you can set `view_controller_class:`.
+
+```ruby
+{
+  title: 'Person',
+  name: :person,
+  type: :selector_push,
+  view_controller_class: PeopleListScreen
+}
+```
+
+Here is a simple example of a table screen. Note that `setRowDescriptor` must be implemented and its value is updated in order to make the selection.
+
+```ruby
+class PeopleListScreen < PM::TableScreen
+
+  def setRowDescriptor(rowDescriptor)
+    @rowDescriptor = rowDescriptor
+  end
+
+  def table_data
+    [{
+      title: @rowDescriptor.title,
+      cells: People.all.map do |person|
+        {
+          title: person.name,
+          action: -> {
+            @rowDescriptor.value = person.id
+            close # go back to form screen
+          }
+        }
+      end
+    }]
+  end
+end
+```
 
 ![Screenshot of Map Custom Selector](https://github.com/xmartlabs/XLForm/raw/master/Examples/Objective-C/Examples/Selectors/CustomSelectors/XLFormRowViewController/XLForm-map-custom-selector.gif)
 
 ![Screenshot of Dynamic Custom Selector](https://github.com/xmartlabs/XLForm/raw/master/Examples/Objective-C/Examples/Selectors/DynamicSelector/XLForm-dynamic-custom-selector.gif)
+
+See [XLForm documentation](https://github.com/xmartlabs/XLForm/#custom-selectors---selector-row-with-a-custom-selector-view-controller) for more information.
+
 
 ### Cell
 
