@@ -11,36 +11,15 @@ module ProMotion
 
       form_options = self.class.get_form_options
 
-      if form_options[:on_cancel]
-        on_cancel = form_options[:on_cancel]
-        title = NSLocalizedString('Cancel', nil)
-        item = :cancel
-        if on_cancel.is_a? Hash
-          title = on_cancel[:title] if on_cancel[:title]
-          item = on_cancel[:item] if on_cancel[:item]
-        end
+      on_cancel = form_options[:on_cancel]
+      on_save = form_options[:on_save]
 
-        set_nav_bar_button :left, {
-          system_item: item,
-          title: title,
-          action: 'on_cancel:'
-        }
+      if on_cancel
+        set_nav_bar_button :left, button_config(on_cancel, default_item: :cancel, action: 'on_cancel:')
       end
 
-      if form_options[:on_save]
-        on_cancel = form_options[:on_save]
-        title = NSLocalizedString('Save', nil)
-        item = :save
-        if on_cancel.is_a? Hash
-          title = on_cancel[:title] if on_cancel[:title]
-          item = on_cancel[:item] if on_cancel[:item]
-        end
-
-        set_nav_bar_button :right, {
-          system_item: item,
-          title: title,
-          action: 'on_save:'
-        }
+      if on_save
+        set_nav_bar_button :right, button_config(on_save, default_item: :save, action: 'on_save:')
       end
 
       # support for RMQ stylesheet using `form_view`
@@ -51,6 +30,23 @@ module ProMotion
       end
 
       self.form_added if self.respond_to?(:form_added)
+    end
+
+    def button_config(user_config, opts = {})
+      button_config = { action: opts[:action] } # always call internal method before calling user-defined method
+
+      if user_config.is_a? Hash
+        title = user_config[:title]
+        item = user_config[:item] || user_config[:system_item]
+      end
+
+      if title
+        button_config[:title] = title
+      else
+        button_config[:system_item] = item || opts[:default_item]
+      end
+
+      set_nav_bar_button :right, button_config
     end
 
     def form_data
@@ -203,6 +199,7 @@ module ProMotion
     end
 
     protected
+
     def on_cancel(_)
       form_options = self.class.get_form_options
       if form_options[:on_cancel]
