@@ -19,9 +19,9 @@ $ rake pod:install
 
 ## Usage
 
-`PM::XLFormScreen` include `PM::ScreenModule` so you'll have all ProMotion methods available.
+`PM::XLFormScreen` includes `PM::ScreenModule` so you'll have all the same ProMotion screen methods available.
 
-To create a form, create a new `PM::XLFormScreen` and implement `form_data`.
+To create a form screen, subclass `PM::XLFormScreen` and define a `form_data` method.
 
 ```ruby
 class TestFormScreen < PM::XLFormScreen
@@ -107,30 +107,53 @@ end
 * :image (ProMotion-XLForm specific)
 * :color (ProMotion-XLForm specific using [RSColorPicker](https://github.com/RSully/RSColorPicker))
 
-### Class options
+### Form Options
+
+The `form_options` class method allows you to customize the default behavior of the form.
 
 ```ruby
 class TestFormScreen < PM::XLFormScreen
 
-  form_options required:  :asterisks, # add an asterisk to required fields
-               on_save:   :'save_form:', # will be called when you touch save
-               on_cancel: :cancel_form, # will be called when you touch cancel
-               auto_focus: true # the form will focus on the first focusable field
+  form_options on_save:   :save_form,   # adds a "Save" button in the nav bar and calls this method
+               on_cancel: :cancel_form, # adds a "Cancel" button in the nav bar and calls this method
+               required:  :asterisks,   # display an asterisk next to required fields
+               auto_focus: true         # the form will focus on the first focusable field
 
-   def save_form(values)
-     dismiss_keyboard
-     mp values
-   end
+  def save_form(values)
+    dismiss_keyboard
+    mp values
+  end
 
-   def cancel_form
-   end
+  def cancel_form
+  end
 end
 ```
 
-If you don't want the default navigation controller buttons, you could add something like
+#### Save & Cancel Buttons
+
+By default, no buttons are displayed in the nav bar unless you configure the `on_save` or `on_cancel` options.
+
+You can either pass the name of the method that you want to call when that button is tapped, or you can pass a hash of options, allowing you to configure the title of the button.
+
+**Hash Options:**
+- `title` or `system_item` - The button text or system item that will be displayed.
+- `action` - The method that will be called when the button is tapped.
 
 ```ruby
+form_options on_cancel: { system_item: :trash, action: :cancel_form },
+             on_save: { title: 'Continue', action: :continue }
+```
 
+`system_item` can be any `UIBarButtonSystemItem` constant or one of the following symbols:
+```ruby
+:done, :cancel, :edit, :save, :add, :flexible_space, :fixed_space, :compose,
+:reply, :action, :organize, :bookmarks, :search, :refresh, :stop, :camera,
+:trash, :play, :pause, :rewind, :fast_forward, :undo, :redo
+```
+
+If you would like to display a button as part of your form, you could do something like this:
+
+```ruby
 form_options on_save: :my_save_method
 
 def form_data
