@@ -283,20 +283,17 @@ For a more advanced custom selector, you can set `view_controller_class:`.
 ```ruby
 {
   title: 'Person',
-  name: :person,
+  name: 'person',
   type: :selector_push,
   view_controller_class: PeopleListScreen
 }
 ```
 
-Here is a simple example of a table screen. Note that `setRowDescriptor` must be implemented and its value is updated in order to make the selection.
+Here is an example of a table screen. Note that the `rowDescriptor` setter must be implemented. In order to pass the value back to the previous form screen, update the value of the `rowDescriptor`.
 
 ```ruby
 class PeopleListScreen < PM::TableScreen
-
-  def setRowDescriptor(rowDescriptor)
-    @rowDescriptor = rowDescriptor
-  end
+  attr_accessor :rowDescriptor
 
   def table_data
     [{
@@ -305,8 +302,8 @@ class PeopleListScreen < PM::TableScreen
         {
           title: person.name,
           action: -> {
-            @rowDescriptor.value = person.id
-            close # go back to form screen
+            rowDescriptor.value = person.id
+            close # go back to the previous screen
           }
         }
       end
