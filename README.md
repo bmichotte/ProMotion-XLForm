@@ -289,7 +289,7 @@ For a more advanced custom selector, you can set `view_controller_class:`.
 }
 ```
 
-Here is an example of a table screen. Note that the `rowDescriptor` setter must be implemented. In order to pass the value back to the previous form screen, update the value of the `rowDescriptor`.
+Here is an example of a table screen. Note that the `rowDescriptor` setter must be implemented. In order to pass the value back to the previous form screen, update the value of the `rowDescriptor`. Note that XLForm will set the `rowDescriptor` later in your view controller's initialization process than you might expect.
 
 ```ruby
 class PeopleListScreen < PM::TableScreen
