@@ -46,7 +46,7 @@ module ProMotion
         button_config[:system_item] = item || opts[:default_item]
       end
 
-      set_nav_bar_button :right, button_config
+      button_config
     end
 
     def form_data
